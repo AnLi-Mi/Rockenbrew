@@ -39,8 +39,8 @@ from flask import Flask, render_template
 
 app=Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def full_form():
-    return render_template("full_form.html")
+    return render_template('full_form.html')
 
 
