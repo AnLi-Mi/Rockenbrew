@@ -10,12 +10,21 @@
 
 <form name="full_form" method="POST" action='/'>
     <h1>CLIENT</h1></br></br>
-    customerID: <input class="pure-input-rounded" type="text" name="customerID"></br></br>
-    rbCustomerID: <input class="pure-input-rounded" type="text" name="rbCustomerID"></br></br>
-    companyName: <input class="pure-input-rounded" type="text" name="comapnyName"></br></br>
+    customerID: <input type="text" name="customerID"></br></br>
+    rbCustomerID: <input type="text" name="rbCustomerID"></br></br>
+    companyName: <input type="text" name="comapnyName"></br></br>
+    companyLocalID: <input type="text" name="companyLocalID"></br></br>
+    companyLocalIDType: <input type="text" name="companyLocalIDType"></br></br>
+    custTypeID: <input type="text" name="custTypeID"></br></br>
+    startDate: <input type="text" name="startDate"></br></br>
+    domicile: <input type="text" name="domicile"></br></br>
     <button type="submit" value="submit">Submit</button>
-</form>
+</form> </br></br>
 
+{% if customerID, rbCustomerID, companyName, companyLocalID, companyLocalIDType, custTypeID, startDate, domicile %}
 
+{{customerID}}, {{rbCustomerID}}, {{companyName}}, {{companyLocalID}}, {{companyLocalIDType}}, {{custTypeID}}, {{startDate}}, {{domicile}}
+
+{% endif %}
 <body>
 </body>
