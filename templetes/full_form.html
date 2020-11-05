@@ -19,8 +19,12 @@
     startDate: <input type="text" name="startDate"></br></br>
     domicile: <input type="text" name="domicile"></br></br>
     <button type="submit" value="submit">Submit</button>
-</form>
+</form> </br></br>
 
+{% if customerID, rbCustomerID, companyName, companyLocalID, companyLocalIDType, custTypeID, startDate, domicile % }
 
+{{customerID}}, {{rbCustomerID}}, {{companyName}}, {{companyLocalID}}, {{companyLocalIDType}}, {{custTypeID}}, {{startDate}}, {{domicile}}
+
+{% endif %}
 <body>
 </body>
