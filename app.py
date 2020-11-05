@@ -36,8 +36,6 @@ f"""INSERT INTO `paymentschedule` (`paymentScheduleID`,
                                    {active},
                                    {customerID});"""
 
-query_delete=
+query_add_payment_schedule =
 
-query_amend=
 
-query_show= 
