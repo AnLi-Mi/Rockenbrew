@@ -68,6 +68,14 @@ def insert_query(query):
     cursor.execute(query)
     conn.commit()
 
+def display_table(query):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    result=cursor.fetchall()
+    result = result[0]
+    result = result[0]
+    return result
 
 @app.route('/', methods=['GET', 'POST'])
 def full_form():
