@@ -57,7 +57,23 @@ def full_form():
         companyLocalIDType=request.form.get('companyLocalIDType')
         custTypeID=request.form.get('custTypeID')
         startDate=request.form.get('startDate')
-        domicile=request.form.get('domicile')        
+        domicile=request.form.get('domicile')
+        query_add_customer= f"""INSERT INTO `customer` (`customerID`,
+                            `rbCustomerID`,
+                            `companyName`,
+                            `companyLocalID`,
+                            `companyLocalIDType`,
+                            `custTypeID`,
+                            `startDate`,
+                            `domicile`)
+                    VALUES ({customerID},
+                            {rbCustomerID},
+                            {companyName},
+                            {companyLocalID},
+                            {companyLocalIDType},
+                            {custTypeID},
+                            {startDate},
+                            {domicile});"""               
     return render_template('full_form.html', customerID=customerID, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
