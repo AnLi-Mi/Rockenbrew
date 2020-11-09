@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
 
+from flaskext.mysql import MySQL
+
+
 
 #query_add_customer= f"""INSERT INTO `customer` (`customerID`,
  #                           `rbCustomerID`,
@@ -39,6 +42,33 @@ from flask import Flask, render_template, request
 
 app=Flask(__name__)
 
+mysql=MySQL()
+
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = '8G13rm3k'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_DATABASE'] = 'rockenbrew'
+mysql.init_app(app)
+
+
+#checking connection
+def connect_msql():
+    conn = mysql.connect()
+    if (conn):
+    # Carry out normal procedure
+        print ("Connection successful")
+    else:
+    # Terminate
+        print ("Connection unsuccessful")
+
+
+def insert_query(query):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+
+
 @app.route('/', methods=['GET', 'POST'])
 def full_form():
     customerID=''
@@ -73,7 +103,8 @@ def full_form():
                             {companyLocalIDType},
                             {custTypeID},
                             {startDate},
-                            {domicile});"""               
+                            {domicile});"""
+        insert_query(query)
     return render_template('full_form.html', customerID=customerID, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
