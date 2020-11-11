@@ -79,7 +79,6 @@ def display_table(query):
 
 @app.route('/', methods=['GET', 'POST'])
 def full_form():
-    customerID=''
     rbCustomerID=''
     companyName=''
     companyLocalID=''
@@ -87,16 +86,16 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
-    if request.method == 'POST' and 'customerID' in request.form:
-        customerID=int(request.form.get('customerID'))
+    if request.method == 'POST' and 'rbCustomerID' in request.form:
+        #customerID=request.form.get('customerID')
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
-        custTypeID=int(request.form.get('custTypeID'))
+        custTypeID=request.form.get('custTypeID')
         startDate=request.form.get('startDate')
         domicile=request.form.get('domicile')
-        query_add_customer= f"""INSERT INTO rockenbrew.clients (customerID,
+        query_add_customer= f"""INSERT INTO rockenbrew.clients (
                             rbCustomerID,
                             companyName,
                             companyLocalID,
@@ -104,8 +103,7 @@ def full_form():
                             custTypeID,
                             startDate,
                             domicile)
-                    VALUES ('{customerID}',
-                            '{rbCustomerID}',
+                    VALUES ('{rbCustomerID}',
                             '{companyName}',
                             '{companyLocalID}',
                             '{companyLocalIDType}',
@@ -113,6 +111,6 @@ def full_form():
                             '{startDate}',
                             '{domicile}');"""
         insert_query(query_add_customer)
-    return render_template('full_form.html', customerID=customerID, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
+    return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
