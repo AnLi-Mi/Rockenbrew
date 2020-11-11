@@ -94,6 +94,8 @@ def full_form():
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
         custTypeID=request.form.get('custTypeID')
+        if custTypeID==None or custTypeID=='':
+            custTypeID=0
         startDate=request.form.get('startDate')
         if startDate==None or startDate=='':
             startDate=date.today()
