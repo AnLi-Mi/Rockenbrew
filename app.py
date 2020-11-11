@@ -96,22 +96,22 @@ def full_form():
         custTypeID=int(request.form.get('custTypeID'))
         startDate=request.form.get('startDate')
         domicile=request.form.get('domicile')
-        query_add_customer= f"""INSERT INTO rockenbrew.clients (`customerID`,
-                            `rbCustomerID`,
-                            `companyName`,
-                            `companyLocalID`,
-                            `companyLocalIDType`,
-                            `custTypeID`,
-                            `startDate`,
-                            `domicile`)
-                    VALUES ({customerID},
-                            {rbCustomerID},
-                            {companyName},
-                            {companyLocalID},
-                            {companyLocalIDType},
-                            {custTypeID},
-                            {startDate},
-                            {domicile});"""
+        query_add_customer= f"""INSERT INTO rockenbrew.clients (customerID,
+                            rbCustomerID,
+                            companyName,
+                            companyLocalID,
+                            companyLocalIDType,
+                            custTypeID,
+                            startDate,
+                            domicile)
+                    VALUES ('{customerID}',
+                            '{rbCustomerID}',
+                            '{companyName}',
+                            '{companyLocalID}',
+                            '{companyLocalIDType}',
+                            '{custTypeID}',
+                            '{startDate}',
+                            '{domicile}');"""
         insert_query(query_add_customer)
     return render_template('full_form.html', customerID=customerID, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
