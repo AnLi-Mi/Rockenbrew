@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 
 from flaskext.mysql import MySQL
+from datetime import date
 
 
 
@@ -94,6 +95,8 @@ def full_form():
         companyLocalIDType=request.form.get('companyLocalIDType')
         custTypeID=request.form.get('custTypeID')
         startDate=request.form.get('startDate')
+        if startDate==None or startDate=='':
+            startDate=date.today()
         domicile=request.form.get('domicile')
         query_add_customer= f"""INSERT INTO rockenbrew.clients (
                             rbCustomerID,
