@@ -87,6 +87,12 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
+    value=''
+    frequency=''
+    firstPaymentDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -99,6 +105,12 @@ def full_form():
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
+        value=request.form.get('value')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
+        customerID=request.form.get('customerID')
         query_add_customer= f"""INSERT INTO rockenbrew.clients (
                             rbCustomerID,
                             companyName,
