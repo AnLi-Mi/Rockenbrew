@@ -88,7 +88,6 @@ def full_form():
     startDate=''
     domicile=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
-        #customerID=request.form.get('customerID')
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
