@@ -87,7 +87,7 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
-    value=''
+    paymentValue=''
     frequency=''
     firstPaymentDate=''
     lastPaymentDate=''
@@ -105,7 +105,7 @@ def full_form():
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
-        value=request.form.get('value')
+        paymentValue=request.form.get('paymentValue')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
@@ -127,14 +127,14 @@ def full_form():
                             '{startDate}',
                             '{domicile}');"""
         query_add_payment= f"""INSERT INTO rockenbrew.paymentschedule(
-                            value,
+                            paymentValue,
                             frequency,
                             firstPaymentDate,
                             startDate,
                             lastPaymentDate,
                             active,
-                            customerID)                            )
-                    VALUES ('{value}',
+                            customerID)                            
+                    VALUES ('{paymentValue}',
                             '{frequency}',
                             '{firstPaymentDate}',
                             '{startDate}',
