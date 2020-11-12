@@ -114,7 +114,23 @@ def full_form():
                             '{custTypeID}',
                             '{startDate}',
                             '{domicile}');"""
+        query_add_payment= f"""INSERT INTO rockenbrew.paymentschedule(
+                            value,
+                            frequency,
+                            firstPaymentDate,
+                            startDate,
+                            lastPaymentDate,
+                            active,
+                            customerID)                            )
+                    VALUES ('{value}',
+                            '{frequency}',
+                            '{firstPaymentDate}',
+                            '{startDate}',
+                            '{lastPaymentDate}',
+                            '{active}',
+                            '{customerID}');"""
         insert_query(query_add_customer)
+        insert_query(query_add_payment)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
