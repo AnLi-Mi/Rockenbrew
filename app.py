@@ -87,8 +87,13 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
+    paymentValue=''
+    frequency=''
+    firstPaymentDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
-        #customerID=request.form.get('customerID')
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
@@ -100,6 +105,12 @@ def full_form():
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
+        paymentValue=request.form.get('paymentValue')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
+        customerID=request.form.get('customerID')
         query_add_customer= f"""INSERT INTO rockenbrew.clients (
                             rbCustomerID,
                             companyName,
@@ -115,7 +126,23 @@ def full_form():
                             '{custTypeID}',
                             '{startDate}',
                             '{domicile}');"""
+        query_add_payment= f"""INSERT INTO rockenbrew.paymentschedule(
+                            paymentValue,
+                            frequency,
+                            firstPaymentDate,
+                            startDate,
+                            lastPaymentDate,
+                            active,
+                            customerID)                            
+                    VALUES ('{paymentValue}',
+                            '{frequency}',
+                            '{firstPaymentDate}',
+                            '{startDate}',
+                            '{lastPaymentDate}',
+                            '{active}',
+                            '{customerID}');"""
         insert_query(query_add_customer)
+        insert_query(query_add_payment)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 

@@ -9,7 +9,7 @@
 <h1> Enter client's data </h1></br>
 
 <form name="full_form" method="POST" action='/'>
-    <h1>CLIENT</h1></br></br>
+    <label>Client</label></br></br>
 <!--    customerID: <input type="number" name="customerID"></br></br> -->
     rbCustomerID: <input type="text" name="rbCustomerID" maxlength="50" required></br></br>
     companyName: <input type="text" name="companyName" maxlength="200" required></br></br>
@@ -17,8 +17,16 @@
     companyLocalIDType: <input type="text" name="companyLocalIDType" maxlength="100" required></br></br>
     custTypeID: <input type="number" name="custTypeID" required></br></br>
     startDate: <input type="date" name="startDate"></br></br>
-    domicile: <input type="text" name="domicile" maxlength="2" required></br></br>
-    <button type="submit" value="submit">Submit</button>
+    domicile: <input type="text" name="domicile" maxlength="2" required></br></br></br></br>
+
+    <label>paymentSchedule</label></br></br>
+    paymentValue: <input type="number" name="paymentValue" step="0.01" ></br></br>
+    frequency: <input type="number" name="frequency" step="0.01"></br></br>
+    firstPaymentDate: <input type="date" name="firstPaymentDate" ></br></br>
+    lastPaymentDate: <input type="date" name="lastPaymentDate" ></br></br>
+    active: <input type="number" name="active" ></br></br>
+    customerID: <input type="number" name="customerID" ></br></br>
+    <button type="submit" value="submit">Submit</button></br></br></br></br>
 </form> </br></br>
 
 {% if rbCustomerID, companyName, companyLocalID, companyLocalIDType, custTypeID, startDate, domicile %}
