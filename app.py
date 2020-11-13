@@ -141,6 +141,22 @@ def full_form():
                             '{lastPaymentDate}',
                             '{active}',
                             '{customerID}');"""
+        query_add_licence= f"""INSERT INTO rb_test.licence(
+                            type,
+                            issueDate,
+                            validFrom,
+                            validTo,
+                            activationCode,
+                            paymentScheduleID,
+                            customerID)
+                    VALUES ('{type}',
+                            '{issueDate}',
+                            '{validFrom}',
+                            '{validTo}',
+                            '{activationCode}',
+                            '{paymentScheduleID}',
+                            '{customerID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
+        insert_query(query_add_licence)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
