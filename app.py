@@ -99,6 +99,11 @@ def full_form():
     validTo=''
     activationCode=''
     paymentScheduleID=''
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    licenceID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -123,6 +128,12 @@ def full_form():
         validTo=request.form.get('validTo')
         activationCode=request.form.get('activationCode')
         paymentScheduleID=request.form.get('paymentScheduleID')
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
+        licenceID=request.form.get('licenceID')
+
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
                             companyName,
@@ -168,7 +179,21 @@ def full_form():
                             '{activationCode}',
                             '{paymentScheduleID}',
                             '{customerID}');"""
+        query_add_user= f"""INSERT INTO rb_test.user(
+                            startDate,
+                            username,
+                            city,
+                            domicile,
+                            customerID,
+                            licenceID)
+                    VALUES ('{userStartDate}',
+                            '{username}',
+                            '{city}',
+                            '{userDomicile}',
+                            '{customerID}',
+                            '{licenceID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
+        insert_query(query_add_user)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
