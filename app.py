@@ -168,7 +168,21 @@ def full_form():
                             '{activationCode}',
                             '{paymentScheduleID}',
                             '{customerID}');"""
+        query_add_user= f"""INSERT INTO rb_test.user(
+                            startDate,
+                            username,
+                            city,
+                            domicile,
+                            customerID,
+                            licenceID)
+                    VALUES ('{userStartDate}',
+                            '{username}',
+                            '{city}',
+                            '{userDomicile}',
+                            '{customerID}',
+                            '{licenceID}',);"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
+        insert_query(query_add_user)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
