@@ -93,6 +93,12 @@ def full_form():
     lastPaymentDate=''
     active=''
     customerID=''
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -111,6 +117,12 @@ def full_form():
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
         customerID=request.form.get('customerID')
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
+        paymentScheduleID=request.form.get('paymentScheduleID')
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
                             companyName,
