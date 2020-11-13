@@ -48,7 +48,7 @@ mysql=MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '8G13rm3k'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_DATABASE'] = 'rockenbrew'
+app.config['MYSQL_DATABASE_DATABASE'] = 'rb_test'
 mysql.init_app(app)
 
 
@@ -87,12 +87,18 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
-    paymentValue=''
+    value=''
     frequency=''
     firstPaymentDate=''
     lastPaymentDate=''
     active=''
     customerID=''
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -105,13 +111,19 @@ def full_form():
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
-        paymentValue=request.form.get('paymentValue')
+        value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
         customerID=request.form.get('customerID')
-        query_add_customer= f"""INSERT INTO rockenbrew.clients (
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
+        paymentScheduleID=request.form.get('paymentScheduleID')
+        query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
                             companyName,
                             companyLocalID,
@@ -126,23 +138,37 @@ def full_form():
                             '{custTypeID}',
                             '{startDate}',
                             '{domicile}');"""
-        query_add_payment= f"""INSERT INTO rockenbrew.paymentschedule(
-                            paymentValue,
+        query_add_payment= f"""INSERT INTO rb_test.paymentschedule(
+                            value,
                             frequency,
                             firstPaymentDate,
                             startDate,
                             lastPaymentDate,
                             active,
-                            customerID)                            
-                    VALUES ('{paymentValue}',
+                            customerID)
+                    VALUES ('{value}',
                             '{frequency}',
                             '{firstPaymentDate}',
                             '{startDate}',
                             '{lastPaymentDate}',
                             '{active}',
                             '{customerID}');"""
+        query_add_licence= f"""INSERT INTO rb_test.licence(
+                            type,
+                            issueDate,
+                            validFrom,
+                            validTo,
+                            activationCode,
+                            paymentScheduleID,
+                            customerID)
+                    VALUES ('{type}',
+                            '{issueDate}',
+                            '{validFrom}',
+                            '{validTo}',
+                            '{activationCode}',
+                            '{paymentScheduleID}',
+                            '{customerID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
+        insert_query(query_add_licence)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
-
-
