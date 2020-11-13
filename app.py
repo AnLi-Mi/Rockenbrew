@@ -191,7 +191,7 @@ def full_form():
                             '{city}',
                             '{userDomicile}',
                             '{customerID}',
-                            '{licenceID}',);"""
+                            '{licenceID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
