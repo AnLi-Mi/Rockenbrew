@@ -104,6 +104,9 @@ def full_form():
     city=''
     userDomicile=''
     licenceID=''
+    contactType=''
+    contactDetail=''
+    userID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -133,6 +136,9 @@ def full_form():
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
         licenceID=request.form.get('licenceID')
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
+        userID=request.form.get('userID')
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
@@ -192,8 +198,18 @@ def full_form():
                             '{userDomicile}',
                             '{customerID}',
                             '{licenceID}');"""
+        query_add_contact= f"""INSERT INTO rb_test.contact(
+                            type,
+                            detail,
+                            customerID,
+                            userID)
+                    VALUES ('{contactType}',
+                            '{contactDetail}',
+                            '{customerID}',
+                            '{userID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
         insert_query(query_add_user)
+        insert_query(query_add_contact)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
