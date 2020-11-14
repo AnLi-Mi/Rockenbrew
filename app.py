@@ -106,6 +106,7 @@ def full_form():
     licenceID=''
     contactType=''
     contactDetail=''
+    userID=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -137,6 +138,7 @@ def full_form():
         licenceID=request.form.get('licenceID')
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
+        userID=request.form.get('userID')
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
@@ -204,7 +206,7 @@ def full_form():
                     VALUES ('{contactType}',
                             '{contactDetail}',
                             '{customerID}',
-                            '{userID});"""
+                            '{userID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
