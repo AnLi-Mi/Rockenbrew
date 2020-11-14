@@ -192,8 +192,18 @@ def full_form():
                             '{userDomicile}',
                             '{customerID}',
                             '{licenceID}');"""
+        query_add_contact= f"""INSERT INTO rb_test.contact(
+                            type,
+                            detail,
+                            customerID,
+                            userID)
+                    VALUES ('{contactType}',
+                            '{contactDetail}',
+                            '{customerID}',
+                            '{userID});"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
         insert_query(query_add_user)
+        insert_query(query_add_contact)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
