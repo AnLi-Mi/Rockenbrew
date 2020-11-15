@@ -110,6 +110,10 @@ def full_form():
     password=''
     paymentContact=''
     level=''
+    keyCodeVersion=''
+    keyCode=''
+    kodeActive=''
+    kodeActivationDate=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -145,6 +149,10 @@ def full_form():
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        kodeActive=request.form.get('kodeActive')
+        kodeActivationDate=request.form.get('kodeActivationDate')
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
@@ -222,10 +230,22 @@ def full_form():
                             '{paymentContact}',
                             '{level}',
                             '{userID}');"""
+        query_add_keycoder= f"""INSERT INTO rb_test.keycode(
+                            keyCodeVersion,
+                            keyCode,
+                            active,
+                            date,
+                            licenceID)
+                    VALUES ('{keyCodeVersion}',
+                            '{keyCode}',
+                            '{kodeActive}',
+                            '{kodeActivationDate}',
+                            '{licenceID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
         insert_query(query_add_user)
         insert_query(query_add_contact)
         insert_query(query_add_adminuser)
+        insert_query(query_add_keycode)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
