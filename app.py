@@ -230,7 +230,7 @@ def full_form():
                             '{paymentContact}',
                             '{level}',
                             '{userID}');"""
-        query_add_keycoder= f"""INSERT INTO rb_test.keycode(
+        query_add_keycode= f"""INSERT INTO rb_test.keycode(
                             keyCodeVersion,
                             keyCode,
                             active,
