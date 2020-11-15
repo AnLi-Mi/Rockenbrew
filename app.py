@@ -110,6 +110,10 @@ def full_form():
     password=''
     paymentContact=''
     level=''
+    keyCodeVersion=''
+    keyCode=''
+    kodeActive=''
+    kodeActivationDate=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
@@ -145,6 +149,10 @@ def full_form():
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        kodeActive=request.form.get('kodeActive')
+        kodeActivationDate=request.form.get('kodeActivationDate')
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
