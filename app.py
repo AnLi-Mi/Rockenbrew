@@ -222,10 +222,22 @@ def full_form():
                             '{paymentContact}',
                             '{level}',
                             '{userID}');"""
+        query_add_keycoder= f"""INSERT INTO rb_test.keycode(
+                            keyCodeVersion,
+                            keyCode,
+                            active,
+                            date,
+                            licenceID)
+                    VALUES ('{keyCodeVersion}',
+                            '{keyCode}',
+                            '{kodeActive}',
+                            '{kodeActivationDate}',
+                            '{licenceID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
         insert_query(query_add_licence)
         insert_query(query_add_user)
         insert_query(query_add_contact)
         insert_query(query_add_adminuser)
+        insert_query(query_add_keycode)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
