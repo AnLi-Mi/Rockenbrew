@@ -10,13 +10,22 @@ text-align: center;
 }
 
 
+.pure-form {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    text-align: left;
 
+}
 
 .pure-form label {
     font-size: 20px;
     font-weight: 600;
-    margin-top: 0.5em;
-    margin-right: 0px;
-    margin-bottom: 0.2em;
-    margin-left: 50px;
+    }
+
+.pure-form input {
+
+    margin-left: 20px;
+
 }
