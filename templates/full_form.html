@@ -10,72 +10,75 @@
 
 </head>
 
+<body>
+<div>
+
+
 <h1> Enter client's data </h1></br>
 
-<form class="pure-form" style="margin-left: auto margin-right: auto;" name="full_form" method="POST" action='/'>
-    <label class="form-lebel">Client</label></br></br>
+<form class="pure-form" name="full_form" method="POST" action='/'>
+    <label >Client</label></br></br>
 <!--    customerID: <input type="number" name="customerID"></br></br> -->
-    rbCustomerID: <input type="text" name="rbCustomerID" maxlength="50" required></br></br>
-    companyName: <input type="text" name="companyName" maxlength="200" required></br></br>
-    companyLocalID: <input type="text" name="companyLocalID" maxlength="200" required></br></br>
-    companyLocalIDType: <input type="text" name="companyLocalIDType" maxlength="100" required></br></br>
+    customerID: <input type="number" name="customerID" value='auto'><br><br>
+    rbCustomerID*: <input type="text" name="rbCustomerID" maxlength="50" required></br></br>
+    companyName*: <input type="text" name="companyName" maxlength="200" required></br></br>
+    companyLocalID*: <input type="text" name="companyLocalID" maxlength="200" required></br></br>
+    companyLocalIDType*: <input type="text" name="companyLocalIDType" maxlength="100" required></br></br>
     custTypeID: <input type="number" name="custTypeID" required></br></br>
     startDate: <input type="date" name="startDate"></br></br>
-    domicile: <input type="text" name="domicile" maxlength="2" required></br></br></br></br>
+    domicile*: <input type="text" name="domicile" maxlength="2" required></br></br></br></br>
 
-    <label>PaymentSchedule</label></br></br>
-<!--    paymentScheduleID: <input type="number" name="paymentScheduleID"></br></br> -->
-    value: <input type="number" name="value" step="0.01" ></br></br>
-    frequency: <input type="number" name="frequency" step="0.01"></br></br>
-    firstPaymentDate: <input type="date" name="firstPaymentDate" ></br></br>
+    <label >PaymentSchedule</label></br></br>
+    paymentScheduleID: <input type="number" name="paymentScheduleID" value='auto'></br></br>
+    value*: <input type="number" name="value" step="0.01" required ></br></br>
+    frequency*: <input type="number" name="frequency" step="0.01" required></br></br>
+    firstPaymentDate: <input type="date" name="firstPaymentDate"  ></br></br>
     lastPaymentDate: <input type="date" name="lastPaymentDate" ></br></br>
-    active: <input type="number" name="active" ></br></br>
-    customerID: <input type="number" name="customerID" ></br></br></br></br>
+    active*: <input type="number" name="active" required ></br></br></br></br>
 
 
-    <label>Licence</label></br></br>
-<!--    licenceID: <input type="number" name="licenceID"></br></br> -->
-    type: <input type="number" name="type"></br></br>
+    <label >Licence</label></br></br>
+    licenceID: <input type="number" name="licenceID" value='auto'></br></br>
+    type*: <input type="number" name="type" required></br></br>
     issueDate: <input type="date" name="issueDate"></br></br>
     validFrom: <input type="date" name="validFrom" ></br></br>
     validTo: <input type="date" name="validTo" ></br></br>
-    activationCode: <input type="te" name="activationCode" ></br></br>
-    paymentScheduleID: <input type="number" name="paymentScheduleID" ></br></br></br></br>
+    activationCode*: <input type="text" name="activationCode" required></br></br></br></br>
 
-    <label>User</label></br></br>
-<!--    userID: <input type="number" name="userID"></br></br> -->
+    <label >User</label></br></br>
+    userID: <input type="number" name="userID" value='auto'></br></br>
     userStartDate: <input type="date" name="userStartDate"></br></br>
-    username: <input type="text" maxlength="100" name="username"></br></br>
-    city: <input type="text" maxlength="200" name="city" ></br></br>
-    userDomicile: <input type="text" maxlength="2" name="userDomicile" ></br></br>
-    licenceID: <input type="number" name="licenceID" ></br></br></br></br>
+    username*: <input type="text" maxlength="100" name="username" required></br></br>
+    city*: <input type="text" maxlength="200" name="city" required></br></br>
+    userDomicile*: <input type="text" maxlength="2" name="userDomicile"  required></br></br></br></br>
 
-    <label>Contact</label></br></br>
-    <!--    contactID: <input type="number" name="contactID"></br></br> -->
-    contactType: <input type="number" name="contactType"></br></br>
-    contactDetail: <input type="text" maxlength="500" name="contactDetail"></br></br>
-    userID: <input type="number" name="userID"></br></br></br></br>
+    <label >Contact</label></br></br>
+    contactID: <input type="number" name="contactID" value='auto'></br></br>
+    contactType*: <input type="number" name="contactType" required></br></br>
+    contactDetail*: <input type="text" maxlength="500" name="contactDetail" required></br></br>></br></br>
 
-    <label>AdminUser</label></br></br>
-    <!--    adminUserID: <input type="number" name="adminUserID"></br></br> -->
-    password: <input type="text" maxlength="200" name="password"></br></br>
-    paymentContact: <input type="number" name="paymentContact" maxlength="1"></br></br>
-    level: <input type="number" name="level" maxlength="4" ></br></br></br></br>
+    <label >AdminUser</label></br></br>
+    adminUserID: <input type="number" name="adminUserID" value='auto'></br></br>
+    password*: <input type="text" maxlength="200" name="password" required></br></br>
+    paymentContact*: <input type="number" name="paymentContact" maxlength="1" required></br></br>
+    level*: <input type="number" name="level" maxlength="4" required></br></br></br></br>
 
-    <label>KeyCode</label></br></br>
-    <!--    keyCodeID: <input type="number" name="keyCodeID"></br></br> -->
-    keyCodeVersion: <input type="number" name="keyCodeVersion"></br></br>
-    keyCode: <input type="text" name="keyCode" maxlength="200"></br></br>
-    kodeActive: <input type="number" name="kodeActive"></br></br>
+    <label >KeyCode</label></br></br>
+    keyCodeID: <input type="number" name="keyCodeID" value='auto'></br></br>
+    keyCodeVersion*: <input type="number" name="keyCodeVersion" required></br></br>
+    keyCode*: <input type="text" name="keyCode" maxlength="200" required></br></br>
+    kodeActive*: <input type="number" name="kodeActive" required></br></br>
     kodeActivationDate: <input type="date" name="kodeActivationDate"></br></br></br></br>
 
     <button type="submit" value="submit">Submit</button></br></br></br></br>
 </form> </br></br>
+
+</div>
 
 {% if rbCustomerID, companyName, companyLocalID, companyLocalIDType, custTypeID, startDate, domicile %}
 
 {{rbCustomerID}}, {{companyName}}, {{companyLocalID}}, {{companyLocalIDType}}, {{custTypeID}}, {{startDate}}, {{domicile}}
 
 {% endif %}
-<body>
+
 </body>

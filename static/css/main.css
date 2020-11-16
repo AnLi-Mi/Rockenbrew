@@ -1,15 +1,31 @@
 div {
-text-align: center;
+
 font-family: sans-serif;
-color: gray;
 padding-top: 10px;
 padding-bottom: 10px;
 margin-left: auto;
 margin-right: auto;
+text-align: center;
+
 }
 
 
-.form-lebel {
-    font-size: 15px;
+.pure-form {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    text-align: left;
+
+}
+
+.pure-form label {
+    font-size: 20px;
     font-weight: 600;
+    }
+
+.pure-form input {
+
+    margin-left: 20px;
+
 }

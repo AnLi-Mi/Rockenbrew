@@ -62,12 +62,32 @@ def connect_msql():
     # Terminate
         print ("Connection unsuccessful")
 
+def test_fatching():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query = 'seclect * from customer USE rb_test;'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    result = result[0]
+    result = result[0]
+    return result
+
+
+
 
 def insert_query(query):
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(query)
     conn.commit()
+
+def next_id_number(table, id_number):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
+    cursor.execute(query)
+    result=cursor.fetchone()
+    return result
 
 def display_table(query):
     conn = mysql.connect()
