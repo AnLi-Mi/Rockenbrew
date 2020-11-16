@@ -62,20 +62,6 @@ def connect_msql():
     # Terminate
         print ("Connection unsuccessful")
 
-def test_fatching():
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    query1= 'USE rb_test;'
-    query2 = 'select * from customer'
-    cursor.execute(query1)
-    cursor.execute(query2)
-    result=cursor.fetchall()
-    result = result[0]
-    return result
-
-
-
-
 def insert_query(query):
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -156,21 +142,19 @@ def full_form():
         firstPaymentDate=request.form.get('firstPaymentDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
-        customerID=request.form.get('customerID')
+
         type=request.form.get('type')
         issueDate=request.form.get('issueDate')
         validFrom=request.form.get('validFrom')
         validTo=request.form.get('validTo')
         activationCode=request.form.get('activationCode')
-        paymentScheduleID=request.form.get('paymentScheduleID')
+
         userStartDate=request.form.get('userStartDate')
         username=request.form.get('username')
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
-        licenceID=request.form.get('licenceID')
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
-        userID=request.form.get('userID')
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
@@ -178,6 +162,13 @@ def full_form():
         keyCode=request.form.get('keyCode')
         kodeActive=request.form.get('kodeActive')
         kodeActivationDate=request.form.get('kodeActivationDate')
+
+        customerID=next_id_number(customer, customerID)
+        paymentScheduleID=next_id_number(paymentschedule, paymentScheduleID)
+        licenceID=next_id_number(licence, licenceID)
+        userID=next_id_number(user, userID)
+
+
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
