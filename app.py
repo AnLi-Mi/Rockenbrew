@@ -69,6 +69,14 @@ def insert_query(query):
     cursor.execute(query)
     conn.commit()
 
+def next_id_number(table, id_number):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
+    cursor.execute(query)
+    result=cursor.fetchone()
+    return result
+
 def display_table(query):
     conn = mysql.connect()
     cursor = conn.cursor()
