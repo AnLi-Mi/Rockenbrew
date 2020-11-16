@@ -62,6 +62,18 @@ def connect_msql():
     # Terminate
         print ("Connection unsuccessful")
 
+def test_fatching():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query = 'seclect * from customer USE rb_test;'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    result = result[0]
+    result = result[0]
+    return result
+
+
+
 
 def insert_query(query):
     conn = mysql.connect()
