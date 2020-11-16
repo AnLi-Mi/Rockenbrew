@@ -62,19 +62,6 @@ def connect_msql():
     # Terminate
         print ("Connection unsuccessful")
 
-def test_fatching():
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    query = 'seclect * from customer USE rb_test;'
-    cursor.execute(query)
-    result=cursor.fetchall()
-    result = result[0]
-    result = result[0]
-    return result
-
-
-
-
 def insert_query(query):
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -84,10 +71,14 @@ def insert_query(query):
 def next_id_number(table, id_number):
     conn = mysql.connect()
     cursor = conn.cursor()
-    query = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
-    cursor.execute(query)
+    query1 = 'USE rb_test;'
+    query2 = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
+    cursor.execute(query1)
+    cursor.execute(query2)
     result=cursor.fetchone()
-    return result
+    result = result[0]
+    return int(result)+1
+
 
 def display_table(query):
     conn = mysql.connect()
@@ -151,21 +142,19 @@ def full_form():
         firstPaymentDate=request.form.get('firstPaymentDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
-        customerID=request.form.get('customerID')
+
         type=request.form.get('type')
         issueDate=request.form.get('issueDate')
         validFrom=request.form.get('validFrom')
         validTo=request.form.get('validTo')
         activationCode=request.form.get('activationCode')
-        paymentScheduleID=request.form.get('paymentScheduleID')
+
         userStartDate=request.form.get('userStartDate')
         username=request.form.get('username')
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
-        licenceID=request.form.get('licenceID')
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
-        userID=request.form.get('userID')
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
@@ -173,6 +162,13 @@ def full_form():
         keyCode=request.form.get('keyCode')
         kodeActive=request.form.get('kodeActive')
         kodeActivationDate=request.form.get('kodeActivationDate')
+
+        customerID=next_id_number(customer, customerID)
+        paymentScheduleID=next_id_number(paymentschedule, paymentScheduleID)
+        licenceID=next_id_number(licence, licenceID)
+        userID=next_id_number(user, userID)
+
+
 
         query_add_customer= f"""INSERT INTO rb_test.customer (
                             rbCustomerID,
