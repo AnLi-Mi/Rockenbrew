@@ -65,10 +65,11 @@ def connect_msql():
 def test_fatching():
     conn = mysql.connect()
     cursor = conn.cursor()
-    query = 'seclect * from customer USE rb_test;'
-    cursor.execute(query)
+    query1= 'USE rb_test;'
+    query2 = 'select * from customer'
+    cursor.execute(query1)
+    cursor.execute(query2)
     result=cursor.fetchall()
-    result = result[0]
     result = result[0]
     return result
 
@@ -84,10 +85,14 @@ def insert_query(query):
 def next_id_number(table, id_number):
     conn = mysql.connect()
     cursor = conn.cursor()
-    query = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
-    cursor.execute(query)
+    query1 = 'USE rb_test;'
+    query2 = f"""SELECT {id_number} FROM rb_test.{table} WHERE {id_number} = (SELECT MAX({id_number}) FROM {table});"""
+    cursor.execute(query1)
+    cursor.execute(query2)
     result=cursor.fetchone()
-    return result
+    result = result[0]
+    return int(result)+1
+
 
 def display_table(query):
     conn = mysql.connect()
