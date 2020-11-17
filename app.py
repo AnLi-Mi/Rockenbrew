@@ -131,6 +131,7 @@ def full_form():
     keyCode=''
     kodeActive=''
     kodeActivationDate=''
+
     if request.method == 'POST' and 'rbCustomerID' in request.form:
 
         rbCustomerID=request.form.get('rbCustomerID')
@@ -459,3 +460,30 @@ def adminuser_form():
                             '{userID}');"""
         insert_query(query_add_adminuse)
     return render_template('adminuser_form.html')
+
+@app.route("/keycode_form", methods = ['GET', 'POST'])
+def keycode_form():
+    keyCodeVersion=''
+    keyCode=''
+    kodeActive=''
+    kodeActivationDate=''
+    licenceID=''
+    if request.method=="POST" and "type" in request.form:
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        kodeActive=request.form.get('kodeActive')
+        kodeActivationDate=request.form.get('kodeActivationDate')
+        licenceID=request.form.get('licenceID')
+        query_add_keycode= f"""INSERT INTO rb_test.keycode(
+                            keyCodeVersion,
+                            keyCode,
+                            active,
+                            date,
+                            licenceID)
+                    VALUES ('{keyCodeVersion}',
+                            '{keyCode}',
+                            '{kodeActive}',
+                            '{kodeActivationDate}',
+                            '{licenceID}');"""
+        insert_query(query_add_keycode)
+    return render_template('keycode_form.html')
