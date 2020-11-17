@@ -98,23 +98,27 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
+
     value=''
     frequency=''
     firstPaymentDate=''
     lastPaymentDate=''
     active=''
     customerID=''
+
     type=''
     issueDate=''
     validFrom=''
     validTo=''
     activationCode=''
     paymentScheduleID=''
+
     userStartDate=''
     username=''
     city=''
     userDomicile=''
     licenceID=''
+
     contactType=''
     contactDetail=''
     userID=''
@@ -126,17 +130,17 @@ def full_form():
     kodeActive=''
     kodeActivationDate=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
+
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
         custTypeID=request.form.get('custTypeID')
-        if custTypeID==None or custTypeID=='':
-            custTypeID=0
         startDate=request.form.get('startDate')
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
+
         value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
@@ -153,6 +157,7 @@ def full_form():
         username=request.form.get('username')
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
+
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
         password=request.form.get('password')
@@ -163,10 +168,10 @@ def full_form():
         kodeActive=request.form.get('kodeActive')
         kodeActivationDate=request.form.get('kodeActivationDate')
 
-        customerID=next_id_number(customer, customerID)
-        paymentScheduleID=next_id_number(paymentschedule, paymentScheduleID)
-        licenceID=next_id_number(licence, licenceID)
-        userID=next_id_number(user, userID)
+        customerID=next_id_number("customer", "customerID")
+        paymentScheduleID=next_id_number("paymentschedule", "paymentScheduleID")
+        licenceID=next_id_number("licence", "licenceID")
+        userID=next_id_number("user", "userID")
 
 
 
@@ -265,3 +270,141 @@ def full_form():
         insert_query(query_add_adminuser)
         insert_query(query_add_keycode)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
+
+@app.route('/customer_form', methods = ['GET', 'POST'])
+def customer_form():
+    rbCustomerID=''
+    companyName=''
+    companyLocalID=''
+    companyLocalIDType=''
+    custTypeID=''
+    startDate=''
+    domicile=''
+    if request.method == 'POST' and 'rbCustomerID' in request.form:
+        rbCustomerID=request.form.get('rbCustomerID')
+        companyName=request.form.get('companyName')
+        companyLocalID=request.form.get('companyLocalID')
+        companyLocalIDType=request.form.get('companyLocalIDType')
+        custTypeID=request.form.get('custTypeID')
+        startDate=request.form.get('startDate')
+        if startDate==None or startDate=='':
+            startDate=date.today()
+        domicile=request.form.get('domicile')
+
+        query_add_customer= f"""INSERT INTO rb_test.customer (
+                        rbCustomerID,
+                        companyName,
+                        companyLocalID,
+                        companyLocalIDType,
+                        custTypeID,
+                        startDate,
+                        domicile)
+                VALUES ('{rbCustomerID}',
+                        '{companyName}',
+                        '{companyLocalID}',
+                        '{companyLocalIDType}',
+                        '{custTypeID}',
+                        '{startDate}',
+                        '{domicile}');"""
+
+        insert_query(query_add_customer)
+    return render_template('customer_form.html')
+
+@app.route('/paymentschedule_form', methods=['GET','POST'])
+def paymentschedule_form():
+    value=''
+    frequency=''
+    firstPaymentDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
+    if request.method=='POST' and 'value' in request.form:
+        value=request.form.get('value')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
+        customerID=request.form.get('customerID')
+        query_add_payment= f"""INSERT INTO rb_test.paymentschedule(
+                                value,
+                                frequency,
+                                firstPaymentDate,
+                                startDate,
+                                lastPaymentDate,
+                                active,
+                                customerID)
+                        VALUES ('{value}',
+                                '{frequency}',
+                                '{firstPaymentDate}',
+                                '{startDate}',
+                                '{lastPaymentDate}',
+                                '{active}',
+                                '{customerID}');"""
+        insert_query(query_add_payment)
+    return render_template('paymentschedule_form.html')
+
+@app.route('/license_form', methods=['GET','POST'])
+def license_form():
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
+    customerID=''
+    if request.method=='POST' and 'type' in request.form:
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
+        paymentScheduleID=request.form.get('paymentScheduleID')
+        customerID=request.form.get('customerID')
+        query_add_licence= f"""INSERT INTO rb_test.licence(
+                            type,
+                            issueDate,
+                            validFrom,
+                            validTo,
+                            activationCode,
+                            paymentScheduleID,
+                            customerID)
+                    VALUES ('{type}',
+                            '{issueDate}',
+                            '{validFrom}',
+                            '{validTo}',
+                            '{activationCode}',
+                            '{paymentScheduleID}',
+                            '{customerID}');"""
+        insert_query(query_add_licence)
+    return render_template('license_form.html')
+
+@app.route('/user_form', methods=['GET','POST'])
+def user_form():
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    customerID=''
+    licenceID=''
+    if request.method=='POST' and 'userStartDate' in request.form:
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
+        customerID=request.form.get('customerID')
+        licenceID=request.form.get('licenseID')
+        query_add_user= f"""INSERT INTO rb_test.user(
+                            startDate,
+                            username,
+                            city,
+                            domicile,
+                            customerID,
+                            licenceID)
+                    VALUES ('{userStartDate}',
+                            '{username}',
+                            '{city}',
+                            '{userDomicile}',
+                            '{customerID}',
+                            '{licenceID}');"""
+        insert_query(query_add_user)
+    return render_template('user_form.html')

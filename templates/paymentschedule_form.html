@@ -1,0 +1,29 @@
+<! DOCTYPE html>
+<head>
+
+<title>Payment Schedule Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div>
+
+<form class="pure-form" method="POST" action="/paymentschedule_form" name=="paymentschedule_form">
+    <label >PaymentSchedule</label></br></br>
+        paymentScheduleID: <input type="number" name="paymentScheduleID" placeholder="generated automaticly" disabled></br></br>
+        value*: <input type="number" name="value" step="0.01" required ></br></br>
+        frequency in days*: <input type="number" name="frequency" step="0.01" required></br></br>
+        firstPaymentDate: <input type="date" name="firstPaymentDate"></br></br>
+        lastPaymentDate: <input type="date" name="lastPaymentDate"></br></br>
+        active*: <input type="number" name="active" min="0" max="1" placeholder="type '0' for 'no' and '1' for 'yes'" required ></br></br>
+        customerID*: <input type="number" name="customerID" maxlength="11" required><br><br></br></br>
+    <button type="submit" value="submit">Submit</button></br></br></br></br>
+</form> </br></br>
+</div>
+</body>
