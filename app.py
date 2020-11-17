@@ -160,6 +160,7 @@ def full_form():
 
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
+
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
@@ -408,3 +409,27 @@ def user_form():
                             '{licenceID}');"""
         insert_query(query_add_user)
     return render_template('user_form.html')
+
+@app.route("/contact_form", methods = ['GET', 'POST'])
+def contact_form():
+    contactType=''
+    contactDetail=''
+    customerID=''
+    userID=''
+    if request.method=="POST" and "type" in request.form:
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
+        customerID=request.form.get('customerID')
+        userID=request.form.get('userID')
+
+        query_add_contact= f"""INSERT INTO rb_test.contact(
+                            type,
+                            detail,
+                            customerID,
+                            userID)
+                    VALUES ('{contactType}',
+                            '{contactDetail}',
+                            '{customerID}',
+                            '{userID}');"""
+        insert_query(query_add_contact)
+    return render_template('contact_form.html')
