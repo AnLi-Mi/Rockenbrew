@@ -105,6 +105,7 @@ def full_form():
     lastPaymentDate=''
     active=''
     customerID=''
+
     type=''
     issueDate=''
     validFrom=''
@@ -305,3 +306,36 @@ def customer_form():
 
         insert_query(query_add_customer)
     return render_template('customer_form.html')
+
+@app.route('/paymentschedule_form', methods=['GET','POST'])
+def paymentschedule_form():
+    value=''
+    frequency=''
+    firstPaymentDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
+    if request.method=='POST' and 'value' in request.form:
+        value=request.form.get('value')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
+
+        query_add_payment= f"""INSERT INTO rb_test.paymentschedule(
+                                value,
+                                frequency,
+                                firstPaymentDate,
+                                startDate,
+                                lastPaymentDate,
+                                active,
+                                customerID)
+                        VALUES ('{value}',
+                                '{frequency}',
+                                '{firstPaymentDate}',
+                                '{startDate}',
+                                '{lastPaymentDate}',
+                                '{active}',
+                                '{customerID}');"""
+        insert_query(query_add_payment)
+    return render_template('paymentschedule_form.html')
