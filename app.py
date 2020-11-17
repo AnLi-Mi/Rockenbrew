@@ -122,13 +122,16 @@ def full_form():
     contactType=''
     contactDetail=''
     userID=''
+
     password=''
     paymentContact=''
     level=''
+
     keyCodeVersion=''
     keyCode=''
     kodeActive=''
     kodeActivationDate=''
+
     if request.method == 'POST' and 'rbCustomerID' in request.form:
 
         rbCustomerID=request.form.get('rbCustomerID')
@@ -160,9 +163,11 @@ def full_form():
 
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
+
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
+
         keyCodeVersion=request.form.get('keyCodeVersion')
         keyCode=request.form.get('keyCode')
         kodeActive=request.form.get('kodeActive')
@@ -408,3 +413,77 @@ def user_form():
                             '{licenceID}');"""
         insert_query(query_add_user)
     return render_template('user_form.html')
+
+@app.route("/contact_form", methods = ['GET', 'POST'])
+def contact_form():
+    contactType=''
+    contactDetail=''
+    customerID=''
+    userID=''
+    if request.method=="POST" and "type" in request.form:
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
+        customerID=request.form.get('customerID')
+        userID=request.form.get('userID')
+
+        query_add_contact= f"""INSERT INTO rb_test.contact(
+                            type,
+                            detail,
+                            customerID,
+                            userID)
+                    VALUES ('{contactType}',
+                            '{contactDetail}',
+                            '{customerID}',
+                            '{userID}');"""
+        insert_query(query_add_contact)
+    return render_template('contact_form.html')
+
+@app.route("/adminuser_form", methods = ['GET', 'POST'])
+def adminuser_form():
+    password=''
+    paymentContact=''
+    level=''
+    userID=''
+    if request.method=="POST" and "type" in request.form:
+        password=request.form.get('password')
+        paymentContact=request.form.get('paymentContact')
+        level=request.form.get('level')
+        userID=request.form.get('userID')
+        query_add_adminuser= f"""INSERT INTO rb_test.adminuser(
+                            password,
+                            paymentContact,
+                            level,
+                            userID)
+                    VALUES ('{password}',
+                            '{paymentContact}',
+                            '{level}',
+                            '{userID}');"""
+        insert_query(query_add_adminuse)
+    return render_template('adminuser_form.html')
+
+@app.route("/keycode_form", methods = ['GET', 'POST'])
+def keycode_form():
+    keyCodeVersion=''
+    keyCode=''
+    kodeActive=''
+    kodeActivationDate=''
+    licenceID=''
+    if request.method=="POST" and "type" in request.form:
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        kodeActive=request.form.get('kodeActive')
+        kodeActivationDate=request.form.get('kodeActivationDate')
+        licenceID=request.form.get('licenceID')
+        query_add_keycode= f"""INSERT INTO rb_test.keycode(
+                            keyCodeVersion,
+                            keyCode,
+                            active,
+                            date,
+                            licenceID)
+                    VALUES ('{keyCodeVersion}',
+                            '{keyCode}',
+                            '{kodeActive}',
+                            '{kodeActivationDate}',
+                            '{licenceID}');"""
+        insert_query(query_add_keycode)
+    return render_template('keycode_form.html')
