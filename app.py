@@ -122,9 +122,11 @@ def full_form():
     contactType=''
     contactDetail=''
     userID=''
+
     password=''
     paymentContact=''
     level=''
+
     keyCodeVersion=''
     keyCode=''
     kodeActive=''
@@ -164,6 +166,7 @@ def full_form():
         password=request.form.get('password')
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
+
         keyCodeVersion=request.form.get('keyCodeVersion')
         keyCode=request.form.get('keyCode')
         kodeActive=request.form.get('kodeActive')
@@ -433,3 +436,26 @@ def contact_form():
                             '{userID}');"""
         insert_query(query_add_contact)
     return render_template('contact_form.html')
+
+@app.route("/adminuser_form", methods = ['GET', 'POST'])
+def adminuser_form():
+    password=''
+    paymentContact=''
+    level=''
+    userID=''
+    if request.method=="POST" and "type" in request.form:
+        password=request.form.get('password')
+        paymentContact=request.form.get('paymentContact')
+        level=request.form.get('level')
+        userID=request.form.get('userID')
+        query_add_adminuser= f"""INSERT INTO rb_test.adminuser(
+                            password,
+                            paymentContact,
+                            level,
+                            userID)
+                    VALUES ('{password}',
+                            '{paymentContact}',
+                            '{level}',
+                            '{userID}');"""
+        insert_query(query_add_adminuse)
+    return render_template('adminuser_form.html')

@@ -1,0 +1,29 @@
+<! DOCTYPE html>
+<head>
+
+<title>AdminUser Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div>
+
+<form class="pure-form" method="POST" action="/adminuser_form" name="adminuser_form">
+
+<label>Add New AdminUser</label></br></br></br></br>
+adminUserID: <input type="number" name="adminUserID" placeholder="generated automaticly" disabled></br></br>
+password*: <input type="text" maxlength="200" name="password" required></br></br>
+paymentContact*: <input type="number" name="paymentContact" placeholder= "takes '0' or '1'" required></br></br>
+level*: <input type="number" name="level" placeholder= "takes '0' or '1'" required></br></br>
+userID*: <input type="number" name="userID" required></br></br><br><br>
+
+    <button type="submit" value="submit">Submit</button></br></br></br></br>
+</form> </br></br>
+</div>
+</body>
