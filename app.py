@@ -118,6 +118,7 @@ def full_form():
     city=''
     userDomicile=''
     licenceID=''
+
     contactType=''
     contactDetail=''
     userID=''
@@ -156,6 +157,7 @@ def full_form():
         username=request.form.get('username')
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
+
         contactType=request.form.get('contactType')
         contactDetail=request.form.get('contactDetail')
         password=request.form.get('password')
@@ -375,3 +377,34 @@ def license_form():
                             '{customerID}');"""
         insert_query(query_add_licence)
     return render_template('license_form.html')
+
+@app.route('/user_form', methods=['GET','POST'])
+def user_form():
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    customerID=''
+    licenceID=''
+    if request.method=='POST' and 'userStartDate' in request.form:
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
+        customerID=request.form.get('customerID')
+        licenceID=request.form.get('licenseID')
+        query_add_user= f"""INSERT INTO rb_test.user(
+                            startDate,
+                            username,
+                            city,
+                            domicile,
+                            customerID,
+                            licenceID)
+                    VALUES ('{userStartDate}',
+                            '{username}',
+                            '{city}',
+                            '{userDomicile}',
+                            '{customerID}',
+                            '{licenceID}');"""
+        insert_query(query_add_user)
+    return render_template('user_form.html')
