@@ -163,10 +163,10 @@ def full_form():
         kodeActive=request.form.get('kodeActive')
         kodeActivationDate=request.form.get('kodeActivationDate')
 
-        customerID=next_id_number(customer, customerID)
-        paymentScheduleID=next_id_number(paymentschedule, paymentScheduleID)
-        licenceID=next_id_number(licence, licenceID)
-        userID=next_id_number(user, userID)
+        customerID=next_id_number("customer", "customerID")
+        paymentScheduleID=next_id_number("paymentschedule", "paymentScheduleID")
+        licenceID=next_id_number("licence", "licenceID")
+        userID=next_id_number("user", "userID")
 
 
 
