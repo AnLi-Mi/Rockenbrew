@@ -1,0 +1,33 @@
+<! DOCTYPE html>
+<head>
+
+<title>License Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div>
+
+<form class="pure-form" method="POST" action="/license_form" name=="license_form">
+
+    <label >Licence</label></br></br>
+
+        licenceID: <input type="number" name="licenceID" placeholder="generated automaticly" disabled></br></br>
+        type*: <input type="number" name="type" placeholder= "takes '0' or '1'" required></br></br>
+        issueDate: <input type="date" name="issueDate"></br></br>
+        validFrom: <input type="date" name="validFrom" ></br></br>
+        validTo: <input type="date" name="validTo" ></br></br>
+        activationCode*: <input type="text" name="activationCode" required></br></br>
+        customerID*: <input type="number" name="customerID" required><br><br>
+        paymentScheduleID*: <input type="number" name="paymentScheduleID" required></br></br></br></br>
+
+    <button type="submit" value="submit">Submit</button></br></br></br></br>
+</form> </br></br>
+</div>
+</body>

@@ -112,6 +112,7 @@ def full_form():
     validTo=''
     activationCode=''
     paymentScheduleID=''
+
     userStartDate=''
     username=''
     city=''
@@ -321,7 +322,7 @@ def paymentschedule_form():
         firstPaymentDate=request.form.get('firstPaymentDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
-
+        customerID=request.form.get('customerID')
         query_add_payment= f"""INSERT INTO rb_test.paymentschedule(
                                 value,
                                 frequency,
@@ -339,3 +340,38 @@ def paymentschedule_form():
                                 '{customerID}');"""
         insert_query(query_add_payment)
     return render_template('paymentschedule_form.html')
+
+@app.route('/license_form', methods=['GET','POST'])
+def license_form():
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
+    customerID=''
+    if request.method=='POST' and 'type' in request.form:
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
+        paymentScheduleID=request.form.get('paymentScheduleID')
+        customerID=request.form.get('customerID')
+        query_add_licence= f"""INSERT INTO rb_test.licence(
+                            type,
+                            issueDate,
+                            validFrom,
+                            validTo,
+                            activationCode,
+                            paymentScheduleID,
+                            customerID)
+                    VALUES ('{type}',
+                            '{issueDate}',
+                            '{validFrom}',
+                            '{validTo}',
+                            '{activationCode}',
+                            '{paymentScheduleID}',
+                            '{customerID}');"""
+        insert_query(query_add_licence)
+    return render_template('license_form.html')
