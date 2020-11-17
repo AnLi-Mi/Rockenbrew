@@ -98,6 +98,7 @@ def full_form():
     custTypeID=''
     startDate=''
     domicile=''
+
     value=''
     frequency=''
     firstPaymentDate=''
@@ -126,17 +127,17 @@ def full_form():
     kodeActive=''
     kodeActivationDate=''
     if request.method == 'POST' and 'rbCustomerID' in request.form:
+
         rbCustomerID=request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
         custTypeID=request.form.get('custTypeID')
-        if custTypeID==None or custTypeID=='':
-            custTypeID=0
         startDate=request.form.get('startDate')
         if startDate==None or startDate=='':
             startDate=date.today()
         domicile=request.form.get('domicile')
+
         value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
@@ -265,3 +266,42 @@ def full_form():
         insert_query(query_add_adminuser)
         insert_query(query_add_keycode)
     return render_template('full_form.html', rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
+
+@app.route('/customer_form', methods = ['GET', 'POST'])
+def customer_form():
+    rbCustomerID=''
+    companyName=''
+    companyLocalID=''
+    companyLocalIDType=''
+    custTypeID=''
+    startDate=''
+    domicile=''
+    if request.method == 'POST' and 'rbCustomerID' in request.form:
+        rbCustomerID=request.form.get('rbCustomerID')
+        companyName=request.form.get('companyName')
+        companyLocalID=request.form.get('companyLocalID')
+        companyLocalIDType=request.form.get('companyLocalIDType')
+        custTypeID=request.form.get('custTypeID')
+        startDate=request.form.get('startDate')
+        if startDate==None or startDate=='':
+            startDate=date.today()
+        domicile=request.form.get('domicile')
+
+        query_add_customer= f"""INSERT INTO rb_test.customer (
+                        rbCustomerID,
+                        companyName,
+                        companyLocalID,
+                        companyLocalIDType,
+                        custTypeID,
+                        startDate,
+                        domicile)
+                VALUES ('{rbCustomerID}',
+                        '{companyName}',
+                        '{companyLocalID}',
+                        '{companyLocalIDType}',
+                        '{custTypeID}',
+                        '{startDate}',
+                        '{domicile}');"""
+
+        insert_query(query_add_customer)
+    return render_template('customer_form.html')
