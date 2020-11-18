@@ -450,3 +450,8 @@ def keycode_form():
                             '{licenceID}');"""
         insert_query(query_add_keycode)
     return render_template('keycode_form.html')
+
+@app.route('/all_customers', methods = ['GET', 'POST'])
+def all_customers():
+    results=display_table("customer")
+    return render_template('all_customers.html', results=results)
