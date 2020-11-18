@@ -455,3 +455,9 @@ def keycode_form():
 def all_customers():
     results=display_table("customer")
     return render_template('all_customers.html', results=results)
+
+
+@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
+def all_paymentschedules():
+    results=display_table("paymentschedule")
+    return render_template('all_paymentschedules.html', results=results)
