@@ -311,8 +311,8 @@ def paymentschedule_form():
         insert_query(query_add_payment)
     return render_template('paymentschedule_form.html')
 
-@app.route('/license_form', methods=['GET','POST'])
-def license_form():
+@app.route('/licence_form', methods=['GET','POST'])
+def licence_form():
     type=''
     issueDate=''
     validFrom=''
@@ -344,7 +344,7 @@ def license_form():
                             '{paymentScheduleID}',
                             '{customerID}');"""
         insert_query(query_add_licence)
-    return render_template('license_form.html')
+    return render_template('licence_form.html')
 
 @app.route('/user_form', methods=['GET','POST'])
 def user_form():
@@ -360,7 +360,7 @@ def user_form():
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
         customerID=request.form.get('customerID')
-        licenceID=request.form.get('licenseID')
+        licenceID=request.form.get('licenceID')
         query_add_user= f"""INSERT INTO rb_test.user(
                             startDate,
                             username,
@@ -455,3 +455,15 @@ def keycode_form():
 def all_customers():
     results=display_table("customer")
     return render_template('all_customers.html', results=results)
+
+
+@app.route('/all_licences', methods = ['GET', 'POST'])
+def all_licences():
+    results=display_table("licence")
+    return render_template('all_licences.html', results=results)
+
+
+@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
+def all_paymentschedules():
+    results=display_table("paymentschedule")
+    return render_template('all_paymentschedules.html', results=results)

@@ -1,0 +1,52 @@
+<! DOCTYPE html>
+<head>
+
+<title>All Licences</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <h3>All Licences</h3><br><br>
+
+    <a href='/licence_form'><button>Add New</button></a><br><br><br>
+
+<div>
+
+    <table>
+        <tr>
+            <th>licenceID</th>
+            <th>type</th>
+            <th>issueDate</th>
+            <th>validFrom</th>
+            <th>validTo</th>
+            <th>activationCode</th>
+            <th>paymentScheduleID</th>
+            <th>customerID</th>
+        </tr>
+
+{% if results %}
+
+{% for result in results %}
+        <tr>
+            <td>{{result[0]}}</td>
+            <td>{{result[1]}}</td>
+            <td>{{result[2]}}</td>
+            <td>{{result[3]}}</td>
+            <td>{{result[4]}}</td>
+            <td>{{result[5]}}</td>
+            <td>{{result[6]}}</td>
+            <td>{{result[7]}}</td>
+        </tr>
+
+{% endfor %}
+
+{% endif %}
+    </table>
+</div>
+</body>
