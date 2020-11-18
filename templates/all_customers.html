@@ -13,8 +13,35 @@
 <body>
 
 <div>
+    <table>
+        <tr>
+            <th>customerID </th>
+            <th>rbCustomerID </th>
+            <th>companyName </th>
+            <th>companyLocalID</th>
+            <th>companyLocalIDType</th>
+            <th>custTypeID </th>
+            <th>startDate</th>
+            <th>domicile </th>
+        </tr>
+
 {% if results %}
-{{results}}
+
+{% for result in results %}
+        <tr>
+            <td>{{result[0]}}</td>
+            <td>{{result[1]}}</td>
+            <td>{{result[2]}}</td>
+            <td>{{result[3]}}</td>
+            <td>{{result[4]}}</td>
+            <td>{{result[5]}}</td>
+            <td>{{result[6]}}</td>
+            <td>{{result[7]}}</td>
+        </tr>
+
+{% endfor %}
+
 {% endif %}
+    </table>
 </div>
 </body>
