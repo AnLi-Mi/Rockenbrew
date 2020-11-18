@@ -3,44 +3,6 @@ from flask import Flask, render_template, request
 from flaskext.mysql import MySQL
 from datetime import date
 
-
-
-#query_add_customer= f"""INSERT INTO `customer` (`customerID`,
- #                           `rbCustomerID`,
-  #                          `companyName`,
-   #                         `companyLocalID`,
-    #                        `companyLocalIDType`,
-     #                       `custTypeID`,
-      #                      `startDate`,
-       #                     `domicile`)
-        #            VALUES ({default_id},
-         #                   {rb_id},
-          #                  {compay_name},
-           #                 {company_local_id},
-            #                {local_id_type},
-             #               {cust_type_id},
-              #              {start_date},
-               #             {domicile});"""
-
-#query_add_payment_schedule = f"""INSERT INTO `paymentschedule` (`paymentScheduleID`,
- #                                  `value`,
-  ##                                 `frequency`,
-     #                              `firstPaymentDate`,
-      #                             `startDate`,
-       #                            `lastPaymentDate`,
-        #                           `active`,
-         #                          `customerID`)
-          #                 VALUES ({paymentScheduleID},
-           #                        {value},
-            #                       {frequency},
-             #                      {firstPaymentDate},
-              #                     {startDate},
-               #                    {lastPaymentDate},
-                #                   {active},
-                 #                  {customerID});"""
-
-#query_add_payment_schedule =
-
 app=Flask(__name__)
 
 mysql=MySQL()
@@ -80,14 +42,15 @@ def next_id_number(table, id_number):
     return int(result)+1
 
 
-def display_table(query):
+def display_table(table):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute(query)
-    result=cursor.fetchall()
-    result = result[0]
-    result = result[0]
-    return result
+    query1 = 'USE rb_test;'
+    query2 = f"""SELECT * FROM rb_test.{table};"""
+    cursor.execute(query1)
+    cursor.execute(query2)
+    results=cursor.fetchall()
+    return results
 
 @app.route('/', methods=['GET', 'POST'])
 def full_form():
