@@ -473,5 +473,5 @@ def all_users():
 
 @app.route('/all_contacts', methods = ['GET', 'POST'])
 def all_contacts():
-    results=display_table("all_contacts")
+    results=display_table("contact")
     return render_template('all_contacts.html', results=results)
