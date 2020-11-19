@@ -456,14 +456,32 @@ def all_customers():
     results=display_table("customer")
     return render_template('all_customers.html', results=results)
 
+@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
+def all_paymentschedules():
+    results=display_table("paymentschedule")
+    return render_template('all_paymentschedules.html', results=results)
 
 @app.route('/all_licences', methods = ['GET', 'POST'])
 def all_licences():
     results=display_table("licence")
     return render_template('all_licences.html', results=results)
 
+@app.route('/all_users', methods = ['GET', 'POST'])
+def all_users():
+    results=display_table("user")
+    return render_template('all_users.html', results=results)
 
-@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
-def all_paymentschedules():
-    results=display_table("paymentschedule")
-    return render_template('all_paymentschedules.html', results=results)
+@app.route('/all_contacts', methods = ['GET', 'POST'])
+def all_contacts():
+    results=display_table("contact")
+    return render_template('all_contacts.html', results=results)
+
+@app.route('/all_adminusers', methods = ['GET', 'POST'])
+def all_adminusers():
+    results=display_table("adminuser")
+    return render_template('all_adminusers.html', results=results)
+
+@app.route('/all_keycodes', methods = ['GET', 'POST'])
+def all_keycodes():
+    results=display_table("keycode")
+    return render_template('all_keycodes.html', results=results)
