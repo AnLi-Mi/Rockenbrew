@@ -475,3 +475,8 @@ def all_users():
 def all_contacts():
     results=display_table("contact")
     return render_template('all_contacts.html', results=results)
+
+@app.route('/all_adminusers', methods = ['GET', 'POST'])
+def all_adminusers():
+    results=display_table("adminuser")
+    return render_template('all_adminusers.html', results=results)
