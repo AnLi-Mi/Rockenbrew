@@ -470,3 +470,8 @@ def all_licences():
 def all_users():
     results=display_table("user")
     return render_template('all_users.html', results=results)
+
+@app.route('/all_contacts', methods = ['GET', 'POST'])
+def all_contacts():
+    results=display_table("all_contacts")
+    return render_template('all_contacts.html', results=results)
