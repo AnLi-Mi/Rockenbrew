@@ -480,3 +480,8 @@ def all_contacts():
 def all_adminusers():
     results=display_table("adminuser")
     return render_template('all_adminusers.html', results=results)
+
+@app.route('/all_keycodes', methods = ['GET', 'POST'])
+def all_keycodes():
+    results=display_table("keycode")
+    return render_template('all_keycodes.html', results=results)
