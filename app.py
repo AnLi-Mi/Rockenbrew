@@ -456,14 +456,17 @@ def all_customers():
     results=display_table("customer")
     return render_template('all_customers.html', results=results)
 
+@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
+def all_paymentschedules():
+    results=display_table("paymentschedule")
+    return render_template('all_paymentschedules.html', results=results)
 
 @app.route('/all_licences', methods = ['GET', 'POST'])
 def all_licences():
     results=display_table("licence")
     return render_template('all_licences.html', results=results)
 
-
-@app.route('/all_paymentschedules', methods = ['GET', 'POST'])
-def all_paymentschedules():
-    results=display_table("paymentschedule")
-    return render_template('all_paymentschedules.html', results=results)
+@app.route('/all_users', methods = ['GET', 'POST'])
+def all_users():
+    results=display_table("user")
+    return render_template('all_users.html', results=results)
