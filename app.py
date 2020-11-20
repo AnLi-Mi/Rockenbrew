@@ -51,8 +51,11 @@ def display_table(table):
     cursor.execute(query2)
     results=cursor.fetchall()
     return results
+@app.route('/', methods=  ['GET', 'POST'])
+def home_page():
+    return render('home_page.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
     rbCustomerID=''
     companyName=''
