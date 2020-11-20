@@ -53,7 +53,7 @@ def display_table(table):
     return results
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
-    return render('home_page.html')
+    return render_template('home_page.html')
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
