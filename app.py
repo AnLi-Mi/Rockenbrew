@@ -497,13 +497,20 @@ query_select_customer_payment_schedule = """SELECT
                                             customer.companyLocalIDType,
                                             customer.custTypeID,
                                             customer.startDate,
-                                            customer.domicile, 
+                                            customer.domicile,
                                             paymentschedule.paymentScheduleID,
                                             paymentschedule.value as payment_value,
                                             paymentschedule.frequency as payment_frequency,
                                             paymentschedule.firstPaymentDate,
                                             paymentschedule.startDate,
                                             paymentschedule.lastPaymentDate,
-                                            paymentschedule.active
+                                            paymentschedule.active,
+                                            licence.licenceID,
+                                            licence.type,
+                                            licence.issueDate,
+                                            licence.validFrom,
+                                            licence.validTo,
+                                            licence.activationCode
                                             FROM customer
-                                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID;"""
+                                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                                            INNER JOIN licence on licence.customerID=paymentschedule.customerID;"""
