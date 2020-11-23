@@ -510,7 +510,13 @@ query_select_customer_payment_schedule = """SELECT
                                             licence.issueDate,
                                             licence.validFrom,
                                             licence.validTo,
-                                            licence.activationCode
+                                            licence.activationCode,
+                                            user.userID,
+                                            user.startDate,
+                                            user.username,
+                                            user.city,
+                                            user.domicile
                                             FROM customer
                                             INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
-                                            INNER JOIN licence on licence.customerID=paymentschedule.customerID;"""
+                                            INNER JOIN licence on licence.customerID=paymentschedule.customerID
+                                            INNER JOIN user on user.customerID=licence.customerID;"""
