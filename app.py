@@ -111,8 +111,8 @@ def home_page():
                             INNER JOIN contact on contact.customerID=customer.customerID
                             INNER JOIN adminuser on adminuser.userID=user.userID
                             INNER JOIN keycode on keycode.licenceID=licence.licenceID;"""
-    result = display_all_tables(query_all_tables)
-    return render_template('home_page.html', result=result)
+    results = display_all_tables(query_all_tables)
+    return render_template('home_page.html', results=results)
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
