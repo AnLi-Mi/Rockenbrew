@@ -51,9 +51,68 @@ def display_table(table):
     cursor.execute(query2)
     results=cursor.fetchall()
     return results
+
+def display_all_tables(query):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query1 = 'USE rb_test;'
+    query2 = query
+    cursor.execute(query1)
+    cursor.execute(query2)
+    results=cursor.fetchall()
+    return results
+
+
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
-    return render_template('home_page.html')
+    query_all_tables = """SELECT
+                            customer.customerID,
+                            customer.rbCustomerID,
+                            customer.companyName,
+                            customer.companyLocalID,
+                            customer.companyLocalIDType,
+                            customer.custTypeID,
+                            customer.startDate,
+                            customer.domicile,
+                            paymentschedule.paymentScheduleID,
+                            paymentschedule.value as payment_value,
+                            paymentschedule.frequency as payment_frequency,
+                            paymentschedule.firstPaymentDate,
+                            paymentschedule.startDate,
+                            paymentschedule.lastPaymentDate,
+                            paymentschedule.active,
+                            licence.licenceID,
+                            licence.type,
+                            licence.issueDate,
+                            licence.validFrom,
+                            licence.validTo,
+                            licence.activationCode,
+                            user.userID,
+                            user.startDate,
+                            user.username,
+                            user.city,
+                            user.domicile,
+                            contact.contactID,
+                            contact.type,
+                            contact.detail,
+                            adminuser.adminUserID,
+                            adminuser.password,
+                            adminuser.paymentContact,
+                            adminuser.level,
+                            keycode.keyCodeID,
+                            keycode.keyCodeVersion,
+                            keycode.keyCode,
+                            keycode.active,
+                            keycode.date
+                            FROM customer
+                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
+                            LEFT JOIN user on user.customerID=licence.customerID
+                            LEFT JOIN contact on contact.customerID=customer.customerID
+                            LEFT JOIN adminuser on adminuser.userID=user.userID
+                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID;"""
+    results = display_all_tables(query_all_tables)
+    return render_template('home_page.html', results=results)
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
@@ -488,50 +547,3 @@ def all_adminusers():
 def all_keycodes():
     results=display_table("keycode")
     return render_template('all_keycodes.html', results=results)
-
-query_select_customer_payment_schedule = """SELECT
-                                            customer.customerID,
-                                            customer.rbCustomerID,
-                                            customer.companyName,
-                                            customer.companyLocalID,
-                                            customer.companyLocalIDType,
-                                            customer.custTypeID,
-                                            customer.startDate,
-                                            customer.domicile,
-                                            paymentschedule.paymentScheduleID,
-                                            paymentschedule.value as payment_value,
-                                            paymentschedule.frequency as payment_frequency,
-                                            paymentschedule.firstPaymentDate,
-                                            paymentschedule.startDate,
-                                            paymentschedule.lastPaymentDate,
-                                            paymentschedule.active,
-                                            licence.licenceID,
-                                            licence.type,
-                                            licence.issueDate,
-                                            licence.validFrom,
-                                            licence.validTo,
-                                            licence.activationCode,
-                                            user.userID,
-                                            user.startDate,
-                                            user.username,
-                                            user.city,
-                                            user.domicile,
-                                            contact.contactID,
-                                            contact.type,
-                                            contact.detail,
-                                            adminuser.adminUserID,
-                                            adminuser.password,
-                                            adminuser.paymentContact,
-                                            adminuser.level,
-                                            keycode.keyCodeID,
-                                            keycode.keyCodeVersion,
-                                            keycode.keyCode,
-                                            keycode.active,
-                                            keycode.date
-                                            FROM customer
-                                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
-                                            INNER JOIN licence on licence.customerID=paymentschedule.customerID
-                                            INNER JOIN user on user.customerID=licence.customerID
-                                            INNER JOIN contact on contact.customerID=customer.customerID
-                                            INNER JOIN adminuser on adminuser.userID=user.userID
-                                            INNER JOIN keycode on keycode.licenceID=licence.licenceID;"""
