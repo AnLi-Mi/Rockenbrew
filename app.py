@@ -105,12 +105,12 @@ def home_page():
                             keycode.active,
                             keycode.date
                             FROM customer
-                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
-                            INNER JOIN licence on licence.customerID=paymentschedule.customerID
-                            INNER JOIN user on user.customerID=licence.customerID
-                            INNER JOIN contact on contact.customerID=customer.customerID
-                            INNER JOIN adminuser on adminuser.userID=user.userID
-                            INNER JOIN keycode on keycode.licenceID=licence.licenceID;"""
+                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
+                            LEFT JOIN user on user.customerID=licence.customerID
+                            LEFT JOIN contact on contact.customerID=customer.customerID
+                            LEFT JOIN adminuser on adminuser.userID=user.userID
+                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID;"""
     results = display_all_tables(query_all_tables)
     return render_template('home_page.html', results=results)
 
