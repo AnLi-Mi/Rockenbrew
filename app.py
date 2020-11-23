@@ -488,3 +488,22 @@ def all_adminusers():
 def all_keycodes():
     results=display_table("keycode")
     return render_template('all_keycodes.html', results=results)
+
+query_select_customer_payment_schedule = """SELECT
+                                            customer.customerID,
+                                            customer.rbCustomerID,
+                                            customer.companyName,
+                                            customer.companyLocalID,
+                                            customer.companyLocalIDType,
+                                            customer.custTypeID,
+                                            customer.startDate,
+                                            customer.domicile, 
+                                            paymentschedule.paymentScheduleID,
+                                            paymentschedule.value as payment_value,
+                                            paymentschedule.frequency as payment_frequency,
+                                            paymentschedule.firstPaymentDate,
+                                            paymentschedule.startDate,
+                                            paymentschedule.lastPaymentDate,
+                                            paymentschedule.active
+                                            FROM customer
+                                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID;"""
