@@ -518,9 +518,14 @@ query_select_customer_payment_schedule = """SELECT
                                             user.domicile,
                                             contact.contactID,
                                             contact.type,
-                                            contact.detail
+                                            contact.detail,
+                                            adminuser.adminUserID,
+                                            adminuser.password,
+                                            adminuser.paymentContact,
+                                            adminuser.level
                                             FROM customer
                                             INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
                                             INNER JOIN licence on licence.customerID=paymentschedule.customerID
                                             INNER JOIN user on user.customerID=licence.customerID
-                                            INNER JOIN contact on contact.customerID=customer.customerID;"""
+                                            INNER JOIN contact on contact.customerID=customer.customerID
+                                            INNER JOIN adminuser on adminuser.userID=user.userID;"""
