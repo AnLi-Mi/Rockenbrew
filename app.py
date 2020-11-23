@@ -488,3 +488,50 @@ def all_adminusers():
 def all_keycodes():
     results=display_table("keycode")
     return render_template('all_keycodes.html', results=results)
+
+query_select_customer_payment_schedule = """SELECT
+                                            customer.customerID,
+                                            customer.rbCustomerID,
+                                            customer.companyName,
+                                            customer.companyLocalID,
+                                            customer.companyLocalIDType,
+                                            customer.custTypeID,
+                                            customer.startDate,
+                                            customer.domicile,
+                                            paymentschedule.paymentScheduleID,
+                                            paymentschedule.value as payment_value,
+                                            paymentschedule.frequency as payment_frequency,
+                                            paymentschedule.firstPaymentDate,
+                                            paymentschedule.startDate,
+                                            paymentschedule.lastPaymentDate,
+                                            paymentschedule.active,
+                                            licence.licenceID,
+                                            licence.type,
+                                            licence.issueDate,
+                                            licence.validFrom,
+                                            licence.validTo,
+                                            licence.activationCode,
+                                            user.userID,
+                                            user.startDate,
+                                            user.username,
+                                            user.city,
+                                            user.domicile,
+                                            contact.contactID,
+                                            contact.type,
+                                            contact.detail,
+                                            adminuser.adminUserID,
+                                            adminuser.password,
+                                            adminuser.paymentContact,
+                                            adminuser.level,
+                                            keycode.keyCodeID,
+                                            keycode.keyCodeVersion,
+                                            keycode.keyCode,
+                                            keycode.active,
+                                            keycode.date
+                                            FROM customer
+                                            INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                                            INNER JOIN licence on licence.customerID=paymentschedule.customerID
+                                            INNER JOIN user on user.customerID=licence.customerID
+                                            INNER JOIN contact on contact.customerID=customer.customerID
+                                            INNER JOIN adminuser on adminuser.userID=user.userID
+                                            INNER JOIN keycode on keycode.licenceID=licence.licenceID;"""
