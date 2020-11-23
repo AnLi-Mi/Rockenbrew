@@ -29,6 +29,46 @@
 
 {% if results %}
  <table>
+    <tr>
+        <th>customerID</th>
+        <th>rbCustomerID</th>
+        <th>companyName</th>
+        <th>companyLocalID</th>
+        <th>companyLocalIDType</th>
+        <th>custTypeID</th>
+        <th>startDate</th>
+        <th>domicile</th>
+        <th>paymentScheduleID</th>
+        <th>paymentValue</th>
+        <th>paymentFrequency</th>
+        <th>firstPaymentDate</th>
+        <th>startDate</th>
+        <th>lastPaymentDate</th>
+        <th>active</th>
+        <th>licenseID</th>
+        <th>type</th>
+        <th>issueDate</th>
+        <th>validFrom</th>
+        <th>validTo</th>
+        <th>activationCode</th>
+        <th>userID</th>
+        <th>startDate</th>
+        <th>username</th>
+        <th>city</th>
+        <th>domicile</th>
+        <th>contactID</th>
+        <th>type</th>
+        <th>detail</th>
+        <th>adminUserID</th>
+        <th>password</th>
+        <th>paymentContact</th>
+        <th>level</th>
+        <th>keyCodeID</th>
+        <th>keyCodeVersion</th>
+        <th>keyCode</th>
+        <th>kodeActive</th>
+        <th>date</th>
+    </tr>
     {% for result in results %}
      <tr>
          <td>{{result[0]}}</td>
