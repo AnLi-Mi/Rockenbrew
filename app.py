@@ -522,10 +522,16 @@ query_select_customer_payment_schedule = """SELECT
                                             adminuser.adminUserID,
                                             adminuser.password,
                                             adminuser.paymentContact,
-                                            adminuser.level
+                                            adminuser.level,
+                                            keycode.keyCodeID,
+                                            keycode.keyCodeVersion,
+                                            keycode.keyCode,
+                                            keycode.active,
+                                            keycode.date
                                             FROM customer
                                             INNER JOIN paymentschedule on customer.customerID=paymentschedule.customerID
                                             INNER JOIN licence on licence.customerID=paymentschedule.customerID
                                             INNER JOIN user on user.customerID=licence.customerID
                                             INNER JOIN contact on contact.customerID=customer.customerID
-                                            INNER JOIN adminuser on adminuser.userID=user.userID;"""
+                                            INNER JOIN adminuser on adminuser.userID=user.userID
+                                            INNER JOIN keycode on keycode.licenceID=licence.licenceID;"""
