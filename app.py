@@ -52,7 +52,7 @@ def display_table(table):
     results=cursor.fetchall()
     return results
 
-def display_all_tables(query):
+def display_records(query):
     conn = mysql.connect()
     cursor = conn.cursor()
     query1 = 'USE rb_test;'
@@ -63,8 +63,10 @@ def display_all_tables(query):
     return results
 
 
+
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
+    search_input = "Rockenbrew Limited"
     query_all_tables = """SELECT
                             customer.customerID,
                             customer.rbCustomerID,
@@ -111,8 +113,56 @@ def home_page():
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID;"""
-    results = display_all_tables(query_all_tables)
-    return render_template('home_page.html', results=results)
+    query_specific_record = f"""SELECT
+                            customer.customerID,
+                            customer.rbCustomerID,
+                            customer.companyName,
+                            customer.companyLocalID,
+                            customer.companyLocalIDType,
+                            customer.custTypeID,
+                            customer.startDate,
+                            customer.domicile,
+                            paymentschedule.paymentScheduleID,
+                            paymentschedule.value as payment_value,
+                            paymentschedule.frequency as payment_frequency,
+                            paymentschedule.firstPaymentDate,
+                            paymentschedule.startDate,
+                            paymentschedule.lastPaymentDate,
+                            paymentschedule.active,
+                            licence.licenceID,
+                            licence.type,
+                            licence.issueDate,
+                            licence.validFrom,
+                            licence.validTo,
+                            licence.activationCode,
+                            user.userID,
+                            user.startDate,
+                            user.username,
+                            user.city,
+                            user.domicile,
+                            contact.contactID,
+                            contact.type,
+                            contact.detail,
+                            adminuser.adminUserID,
+                            adminuser.password,
+                            adminuser.paymentContact,
+                            adminuser.level,
+                            keycode.keyCodeID,
+                            keycode.keyCodeVersion,
+                            keycode.keyCode,
+                            keycode.active,
+                            keycode.date
+                            FROM customer
+                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
+                            LEFT JOIN user on user.customerID=licence.customerID
+                            LEFT JOIN contact on contact.customerID=customer.customerID
+                            LEFT JOIN adminuser on adminuser.userID=user.userID
+                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID
+                            WHERE customer.companyName = {search_input!r};"""
+    all_records_and_tables = display_records(query_all_tables)
+    spcific_record_all_tables =  display_records(query_specific_record)
+    return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
@@ -154,8 +204,8 @@ def full_form():
 
     keyCodeVersion=''
     keyCode=''
-    kodeActive=''
-    kodeActivationDate=''
+    codeActive=''
+    codeActivationDate=''
 
     if request.method == 'POST' and 'rbCustomerID' in request.form:
 
@@ -195,8 +245,8 @@ def full_form():
 
         keyCodeVersion=request.form.get('keyCodeVersion')
         keyCode=request.form.get('keyCode')
-        kodeActive=request.form.get('kodeActive')
-        kodeActivationDate=request.form.get('kodeActivationDate')
+        codeActive=request.form.get('codeActive')
+        codeActivationDate=request.form.get('codeActivationDate')
 
         customerID=next_id_number("customer", "customerID")
         paymentScheduleID=next_id_number("paymentschedule", "paymentScheduleID")
@@ -289,8 +339,8 @@ def full_form():
                             licenceID)
                     VALUES ('{keyCodeVersion}',
                             '{keyCode}',
-                            '{kodeActive}',
-                            '{kodeActivationDate}',
+                            '{codeActive}',
+                            '{codeActivationDate}',
                             '{licenceID}');"""
         insert_query(query_add_customer)
         insert_query(query_add_payment)
@@ -490,14 +540,14 @@ def adminuser_form():
 def keycode_form():
     keyCodeVersion=''
     keyCode=''
-    kodeActive=''
-    kodeActivationDate=''
+    codeActive=''
+    codeActivationDate=''
     licenceID=''
     if request.method=="POST" and "type" in request.form:
         keyCodeVersion=request.form.get('keyCodeVersion')
         keyCode=request.form.get('keyCode')
-        kodeActive=request.form.get('kodeActive')
-        kodeActivationDate=request.form.get('kodeActivationDate')
+        codeActive=request.form.get('codeActive')
+        codeActivationDate=request.form.get('codeActivationDate')
         licenceID=request.form.get('licenceID')
         query_add_keycode= f"""INSERT INTO rb_test.keycode(
                             keyCodeVersion,
@@ -507,8 +557,8 @@ def keycode_form():
                             licenceID)
                     VALUES ('{keyCodeVersion}',
                             '{keyCode}',
-                            '{kodeActive}',
-                            '{kodeActivationDate}',
+                            '{codeActive}',
+                            '{codeActivationDate}',
                             '{licenceID}');"""
         insert_query(query_add_keycode)
     return render_template('keycode_form.html')

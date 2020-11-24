@@ -25,9 +25,101 @@
     </tr>
  </table><br><br><br><br><br><br><br>
 
+ <form action='/' method='POST'>
+     Inser a name of the company:
+     <input type='text' name='search_input'></input>
+</form>
+
+ {% if spcific_record_all_tables %}
+  <table>
+     <tr>
+         <th>customerID</th>
+         <th>rbCustomerID</th>
+         <th>companyName</th>
+         <th>companyLocalID</th>
+         <th>companyLocalIDType</th>
+         <th>custTypeID</th>
+         <th>startDate</th>
+         <th>customerDomicile</th>
+         <th>paymentScheduleID</th>
+         <th>paymentValue</th>
+         <th>paymentFrequency</th>
+         <th>firstPaymentDate</th>
+         <th>paymentScheduleStartDate</th>
+         <th>lastPaymentDate</th>
+         <th>paymentScheduleActive</th>
+         <th>licenseID</th>
+         <th>licenceType</th>
+         <th>licenceIssueDate</th>
+         <th>licenceValidFrom</th>
+         <th>licenceValidTo</th>
+         <th>licenceActivationCode</th>
+         <th>userID</th>
+         <th>userStartDate</th>
+         <th>username</th>
+         <th>userCity</th>
+         <th>userDomicile</th>
+         <th>contactID</th>
+         <th>contactType</th>
+         <th>contactDetail</th>
+         <th>adminUserID</th>
+         <th>adminUserPassword</th>
+         <th>adminUserPaymentContact</th>
+         <th>adminUserLevel</th>
+         <th>keyCodeID</th>
+         <th>keyCodeVersion</th>
+         <th>keyCode</th>
+         <th>keyCodeActive</th>
+         <th>keyCodeDate</th>
+     </tr>
+     {% for result in spcific_record_all_tables %}
+      <tr>
+          <td>{{result[0]}}</td>
+          <td>{{result[1]}}</td>
+          <td>{{result[2]}}</td>
+          <td>{{result[3]}}</td>
+          <td>{{result[4]}}</td>
+          <td>{{result[5]}}</td>
+          <td>{{result[6]}}</td>
+          <td>{{result[7]}}</td>
+          <td>{{result[8]}}</td>
+          <td>{{result[9]}}</td>
+          <td>{{result[10]}}</td>
+          <td>{{result[11]}}</td>
+          <td>{{result[12]}}</td>
+          <td>{{result[13]}}</td>
+          <td>{{result[14]}}</td>
+          <td>{{result[15]}}</td>
+          <td>{{result[16]}}</td>
+          <td>{{result[17]}}</td>
+          <td>{{result[18]}}</td>
+          <td>{{result[19]}}</td>
+          <td>{{result[20]}}</td>
+          <td>{{result[21]}}</td>
+          <td>{{result[22]}}</td>
+          <td>{{result[23]}}</td>
+          <td>{{result[24]}}</td>
+          <td>{{result[25]}}</td>
+          <td>{{result[26]}}</td>
+          <td>{{result[27]}}</td>
+          <td>{{result[28]}}</td>
+          <td>{{result[29]}}</td>
+          <td>{{result[30]}}</td>
+          <td>{{result[31]}}</td>
+          <td>{{result[32]}}</td>
+          <td>{{result[33]}}</td>
+          <td>{{result[34]}}</td>
+          <td>{{result[35]}}</td>
+          <td>{{result[36]}}</td>
+          <td>{{result[37]}}</td>
+      </tr>
+      {% endfor %}
+   </table> <br><br><br>
+  {% endif %}
+
  <a href='/full_form'><button>New Entry - Full Form</button></a><br><br><br>
 
-{% if results %}
+{% if all_records_and_tables %}
  <table>
     <tr>
         <th>customerID</th>
@@ -37,39 +129,39 @@
         <th>companyLocalIDType</th>
         <th>custTypeID</th>
         <th>startDate</th>
-        <th>domicile</th>
+        <th>customerDomicile</th>
         <th>paymentScheduleID</th>
         <th>paymentValue</th>
         <th>paymentFrequency</th>
         <th>firstPaymentDate</th>
-        <th>startDate</th>
+        <th>paymentScheduleStartDate</th>
         <th>lastPaymentDate</th>
-        <th>active</th>
+        <th>paymentScheduleActive</th>
         <th>licenseID</th>
-        <th>type</th>
-        <th>issueDate</th>
-        <th>validFrom</th>
-        <th>validTo</th>
-        <th>activationCode</th>
+        <th>licenceType</th>
+        <th>licenceIssueDate</th>
+        <th>licenceValidFrom</th>
+        <th>licenceValidTo</th>
+        <th>licenceActivationCode</th>
         <th>userID</th>
-        <th>startDate</th>
+        <th>userStartDate</th>
         <th>username</th>
-        <th>city</th>
-        <th>domicile</th>
+        <th>userCity</th>
+        <th>userDomicile</th>
         <th>contactID</th>
-        <th>type</th>
-        <th>detail</th>
+        <th>contactType</th>
+        <th>contactDetail</th>
         <th>adminUserID</th>
-        <th>password</th>
-        <th>paymentContact</th>
-        <th>level</th>
+        <th>adminUserPassword</th>
+        <th>adminUserPaymentContact</th>
+        <th>adminUserLevel</th>
         <th>keyCodeID</th>
         <th>keyCodeVersion</th>
         <th>keyCode</th>
-        <th>kodeActive</th>
-        <th>date</th>
+        <th>keyCodeActive</th>
+        <th>keyCodeDate</th>
     </tr>
-    {% for result in results %}
+    {% for result in all_records_and_tables %}
      <tr>
          <td>{{result[0]}}</td>
          <td>{{result[1]}}</td>
