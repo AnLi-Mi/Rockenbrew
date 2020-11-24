@@ -66,7 +66,9 @@ def display_records(query):
 
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
-    search_input = "Rockenbrew Limited"
+    search_input = ""
+    if request.method ='POST' and 'search_input' in request.form:
+        search_input = request.form.get('search_input')
     query_all_tables = """SELECT
                             customer.customerID,
                             customer.rbCustomerID,
