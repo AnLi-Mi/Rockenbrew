@@ -66,7 +66,7 @@ def display_records(query):
 
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
-    #search_input = "Venue Avenue"
+    search_input = "Rockenbrew Limited"
     query_all_tables = """SELECT
                             customer.customerID,
                             customer.rbCustomerID,
@@ -113,7 +113,7 @@ def home_page():
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID;"""
-    query_specific_record = """SELECT
+    query_specific_record = f"""SELECT
                             customer.customerID,
                             customer.rbCustomerID,
                             customer.companyName,
@@ -159,7 +159,7 @@ def home_page():
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.companyName = 'Venue Avenue';"""
+                            WHERE customer.companyName = {search_input!r};"""
     all_records_and_tables = display_records(query_all_tables)
     spcific_record_all_tables =  display_records(query_specific_record)
     return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
