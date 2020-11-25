@@ -161,7 +161,7 @@ def home_page():
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.companyName LIKE '%{search_input}%';"""
+                            WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     all_records_and_tables = display_records(query_all_tables)
     spcific_record_all_tables =  display_records(query_specific_record)
     return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
