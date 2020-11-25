@@ -598,4 +598,9 @@ def all_adminusers():
 @app.route('/all_keycodes', methods = ['GET', 'POST'])
 def all_keycodes():
     results=display_table("keycode")
-    return render_template('all_keycodes.html', results=results)
+    return render_template('all_keycodes.html', results=results
+
+@app.route('/edit_record/<customerID>', methods=['GET', 'POST'])
+def edit_record():
+    message = f"Hello {customerID}"
+    return render_template('edit_record.html', message=message)
