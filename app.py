@@ -602,5 +602,54 @@ def all_keycodes():
 
 @app.route('/edit_record/<customerID>', methods=['GET', 'POST'])
 def edit_record(customerID):
-    message = f"Hello {customerID}"
-    return render_template('edit_record.html', message=message)
+    display_record = f"""SELECT
+                            customer.customerID,
+                            customer.rbCustomerID,
+                            customer.companyName,
+                            customer.companyLocalID,
+                            customer.companyLocalIDType,
+                            customer.custTypeID,
+                            customer.startDate,
+                            customer.domicile,
+                            paymentschedule.paymentScheduleID,
+                            paymentschedule.value as payment_value,
+                            paymentschedule.frequency as payment_frequency,
+                            paymentschedule.firstPaymentDate,
+                            paymentschedule.startDate,
+                            paymentschedule.lastPaymentDate,
+                            paymentschedule.active,
+                            licence.licenceID,
+                            licence.type,
+                            licence.issueDate,
+                            licence.validFrom,
+                            licence.validTo,
+                            licence.activationCode,
+                            user.userID,
+                            user.startDate,
+                            user.username,
+                            user.city,
+                            user.domicile,
+                            contact.contactID,
+                            contact.type,
+                            contact.detail,
+                            adminuser.adminUserID,
+                            adminuser.password,
+                            adminuser.paymentContact,
+                            adminuser.level,
+                            keycode.keyCodeID,
+                            keycode.keyCodeVersion,
+                            keycode.keyCode,
+                            keycode.active,
+                            keycode.date
+                            FROM customer
+                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
+                            LEFT JOIN user on user.customerID=licence.customerID
+                            LEFT JOIN contact on contact.customerID=customer.customerID
+                            LEFT JOIN adminuser on adminuser.userID=user.userID
+                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID
+                            WHERE customer.customerID = {customerID};"""
+
+    spcific_record_all_tables =  display_records(display_record)
+
+    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
