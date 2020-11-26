@@ -119,7 +119,14 @@ def testuje(rb_id):
     results=cursor.fetchall()
     return results
 
+def one_table(results):
+    lisf_of_column_values=[]
+    for result in results:
+        for column_value in result:
+            if column_value not in lisf_of_column_values:
+                lisf_of_column_values.append(column_value)
 
+    return lisf_of_column_values
 
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
