@@ -130,6 +130,8 @@ def one_table(results):
     return list_of_multiple_values
 
 def one_table2(results):
+    same_cust_ID = []
+    
     base_record = list(results[0])
     list_of_multiple_values=[] 
     for result in results:
@@ -138,6 +140,16 @@ def one_table2(results):
                 list_of_multiple_values.append([result.index(column_value), column_value])
 
     return list_of_multiple_values
+
+def one_table3(results):
+    list_of_records=[]
+    for result in results:
+        list_of_values =[]
+        for column_value in result:
+          list_of_values.append(column_value)
+        list_of_records.append(list_of_values)         
+
+    return list_of_records
 
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
