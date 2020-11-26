@@ -62,7 +62,8 @@ def display_records(query):
     results=cursor.fetchall()
     return results
 
-def testuje(rb_id):
+
+def list_of_column_values(search_input):
     query=                  f"""SELECT
                             customer.customerID,
                             customer.rbCustomerID,
@@ -109,7 +110,7 @@ def testuje(rb_id):
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.rbCustomerID = '{rb_id}';"""
+                            WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     conn = mysql.connect()
     cursor = conn.cursor()
     query1 = 'USE rb_test;'
@@ -117,28 +118,37 @@ def testuje(rb_id):
     cursor.execute(query1)
     cursor.execute(query2)
     results=cursor.fetchall()
-    return results
 
-def one_table(results):
-    base_record = list(results[0])
-    list_of_multiple_values=[]
+    list_of_customerID = []
     for result in results:
-        for column_value in result:
-            if column_value not in base_record:
-                list_of_multiple_values.append([result.index(column_value), column_value])
+        list_of_customerID.append(result[0])
 
-    return list_of_multiple_values
+    print (list_of_customerID )
+        
 
-def one_table2(results):
-    base_record = list(results[0])
-    list_of_multiple_values=[] 
+    # turning the result in tuples into list of lists of lists
+    list_of_records=[]
     for result in results:
+        list_of_values =[]
         for column_value in result:
-            if column_value != base_record[result.index(column_value)]:
-                list_of_multiple_values.append([result.index(column_value), column_value])
+          list_of_value_options =[]
+          list_of_value_options.append(column_value)
+          list_of_values.append(list_of_value_options)
+        list_of_records.append(list_of_values)
 
-    return list_of_multiple_values
+    # moving each column values into a speperate list
+    columns =[]
+    i=0
+    while i<38:
+        my_list=[]
+        for record in list_of_records:
+            my_list.append(record[i])
+        i+=1
+        columns.append(my_list)
 
+    return columns
+
+    
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
     search_input = ""
