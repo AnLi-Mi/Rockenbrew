@@ -118,7 +118,15 @@ def list_of_column_values(search_input):
     cursor.execute(query1)
     cursor.execute(query2)
     results=cursor.fetchall()
-    
+
+    list_of_customerID = []
+    for result in results:
+        list_of_customerID.append(result[0])
+
+    print (list_of_customerID )
+        
+
+    # turning the result in tuples into list of lists of lists
     list_of_records=[]
     for result in results:
         list_of_values =[]
@@ -128,6 +136,7 @@ def list_of_column_values(search_input):
           list_of_values.append(list_of_value_options)
         list_of_records.append(list_of_values)
 
+    # moving each column values into a speperate list
     columns =[]
     i=0
     while i<38:
