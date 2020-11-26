@@ -129,6 +129,16 @@ def one_table(results):
 
     return list_of_multiple_values
 
+def one_table2(results):
+    base_record = list(results[0])
+    list_of_multiple_values=[] 
+    for result in results:
+        for column_value in result:
+            if column_value != base_record[result.index(column_value)]:
+                list_of_multiple_values.append([result.index(column_value), column_value])
+
+    return list_of_multiple_values
+
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
     search_input = ""
