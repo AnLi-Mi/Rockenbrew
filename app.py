@@ -146,11 +146,26 @@ def one_table3(results):
     for result in results:
         list_of_values =[]
         for column_value in result:
-          list_of_values.append(column_value)
-        list_of_records.append(list_of_values)         
+          list_of_value_options =[]
+          list_of_value_options.append(column_value)
+          list_of_values.append(list_of_value_options)
+        list_of_records.append(list_of_values)
 
     return list_of_records
 
+
+def list_of_column_values(results):
+    columns =[]
+    i=0
+    while i<38:
+        my_list=[]
+        for record in results:
+            my_list.append(record[i])
+        i+=1
+        columns.append(my_list)
+            
+    return columns
+    
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
     search_input = ""
