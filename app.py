@@ -120,13 +120,14 @@ def testuje(rb_id):
     return results
 
 def one_table(results):
-    lisf_of_column_values=[]
+    base_record = list(results[0])
+    list_of_multiple_values=[]
     for result in results:
         for column_value in result:
-            if column_value not in lisf_of_column_values:
-                lisf_of_column_values.append(column_value)
+            if column_value not in base_record:
+                list_of_multiple_values.append([result.index(column_value), column_value])
 
-    return lisf_of_column_values
+    return list_of_multiple_values
 
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
