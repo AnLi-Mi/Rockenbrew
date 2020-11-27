@@ -119,34 +119,71 @@ def list_of_column_values(search_input):
     cursor.execute(query2)
     results=cursor.fetchall()
 
+    # extarcting cunstomerIDs of the results
     list_of_customerID = []
     for result in results:
         list_of_customerID.append(result[0])
 
-    print (list_of_customerID )
-        
+    list_of_customerID=set(list_of_customerID)
+    list_of_customerID=list(list_of_customerID)
+
+    results_by_customer_ID=[]
+    results_of_sepcific_customerID=[]
+
+    #creating a list of lists of results with the same customerID
+    for customerID_element in list_of_customerID:
+        results_of_sepcific_customerID=[]
+        for result in results:
+            
+            if customerID_element==result[0]:
+                results_of_sepcific_customerID.append(result)
+
+        results_by_customer_ID.append(results_of_sepcific_customerID)
+
+    results=results_by_customer_ID
 
     # turning the result in tuples into list of lists of lists
     list_of_records=[]
-    for result in results:
-        list_of_values =[]
-        for column_value in result:
-          list_of_value_options =[]
-          list_of_value_options.append(column_value)
-          list_of_values.append(list_of_value_options)
-        list_of_records.append(list_of_values)
+    for same_ID in results:
+        same_ID_records = []
+        for record in same_ID:
+            record_columns =[]
+            for column in record:
+                column_values =[]
+                column_values.append(column)
+                record_columns.append(column_values)               
+            same_ID_records.append(record_columns)
+        list_of_records.append(same_ID_records)
+
+    
 
     # moving each column values into a speperate list
-    columns =[]
-    i=0
-    while i<38:
-        my_list=[]
-        for record in list_of_records:
-            my_list.append(record[i])
-        i+=1
-        columns.append(my_list)
 
-    return columns
+    all_IDs_columns=[]
+    
+    for same_ID in list_of_records:
+        print (same_ID)
+        list_of_columns=[]
+        i=0
+        while i<38:
+            value_list=[]
+            for record in same_ID:
+                value_list.append(record[i][0])
+                list_of_columns.append(value_list)
+               # print(len(list_of_columns))
+            i+=1
+        all_IDs_columns.append(list_of_columns)
+            
+           # columns_in_specific_customerID_list.append(my_list)
+           # columns.append(columns_in_specific_customerID_list)
+   # print(len(all_IDs_columns))
+
+    for column in all_IDs_columns:
+        print(len(column))
+        print(column)
+        print ('------------------------------------------------')
+
+    return all_IDs_columns
 
     
 @app.route('/', methods=  ['GET', 'POST'])
