@@ -83,7 +83,7 @@
          {% for result in spcific_record_all_tables %}
           <tr>
               <td><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>
-              <td>{{result[0]}}</td>
+              <td>{{result[0][0]}}</td>
               <td>{{result[1]}}</td>
               <td>{{result[2]}}</td>
               <td>{{result[3]}}</td>
@@ -109,10 +109,12 @@
               <td>{{result[23]}}</td>
               <td>{{result[24]}}</td>
               <td>{{result[25]}}</td>
-              <td>{{result[26]}}</td>
-              <td>{{result[27]}}</td>
-              <td>{{result[28]}}</td>
-              <td>{{result[29]}}</td>
+              <td>{{result[26][0]}}</td>
+
+              <td>{% for value in result[27] %} {{value}} </br> {% endfor %}</td>
+
+              <td>{% for value in result[28] %} {{value}} </br>  {% endfor %}</td>
+              <td>{{result[29][0]}}</td>
               <td>{{result[30]}}</td>
               <td>{{result[31]}}</td>
               <td>{{result[32]}}</td>
