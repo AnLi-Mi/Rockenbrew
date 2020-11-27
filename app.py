@@ -130,8 +130,8 @@ def list_of_column_values(search_input):
     results_by_customer_ID=[]
     results_of_sepcific_customerID=[]
 
+    #creating a list of lists of results with the same customerID
     for customerID_element in list_of_customerID:
-        print(customerID_element)
         results_of_sepcific_customerID=[]
         for result in results:
             
@@ -140,28 +140,44 @@ def list_of_column_values(search_input):
 
         results_by_customer_ID.append(results_of_sepcific_customerID)
 
-    print (results_by_customer_ID)      
-        
+    results=results_by_customer_ID
 
+    print (results)
+    print ('----------------------------------')
     # turning the result in tuples into list of lists of lists
     list_of_records=[]
-    for result in results:
-        list_of_values =[]
-        for column_value in result:
-          list_of_value_options =[]
-          list_of_value_options.append(column_value)
-          list_of_values.append(list_of_value_options)
-        list_of_records.append(list_of_values)
+    for same_ID in results:
+        same_ID_records = []
+        for record in same_ID:
+            record_columns =[]
+            for column in record:
+                column_values =[]
+                column_values.append(column)
+                record_columns.append(column_values)               
+            same_ID_records.append(record_columns)
+        list_of_records.append(same_ID_records)
+
+    for records in list_of_records:
+        print (records[0][0])
+        print (len(records))
+
+    print ('----------------------------------')
 
     # moving each column values into a speperate list
-    columns =[]
-    i=0
-    while i<38:
-        my_list=[]
-        for record in list_of_records:
-            my_list.append(record[i])
-        i+=1
-        columns.append(my_list)
+
+    columns=[]
+    
+    for customerID_list in list_of_records:
+        columns_in_specific_customerID_list =[]
+        for record in customerID_list:
+            i=0
+            while i<38:
+                value_list=[]
+                for value in record:
+                    value_list.append(velue[i])
+                i+=1
+            columns_in_specific_customerID_list.append(my_list)
+            columns.append(columns_in_specific_customerID_list)
 
     return columns
 
