@@ -119,9 +119,13 @@ def list_of_column_values(search_input):
     cursor.execute(query2)
     results=cursor.fetchall()
 
+    # extarcing cunstomerIDs of the results
     list_of_customerID = []
     for result in results:
         list_of_customerID.append(result[0])
+
+    list_of_customerID=set(list_of_customerID)
+    list_of_customerID=list(list_of_customerID)
 
     print (list_of_customerID )
         
