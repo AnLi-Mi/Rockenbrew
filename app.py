@@ -176,7 +176,6 @@ def list_of_column_values(search_input):
         
         all_IDs_columns.append(list_of_columns)
 
-
              
     return all_IDs_columns
 
@@ -283,7 +282,7 @@ def home_page():
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
                             WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     all_records_and_tables = display_records(query_all_tables)
-    spcific_record_all_tables =  display_records(query_specific_record)
+    spcific_record_all_tables =  list_of_column_values(search_input)
     return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
 
 @app.route('/full_form', methods=['GET', 'POST'])
