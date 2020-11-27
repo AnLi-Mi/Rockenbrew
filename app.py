@@ -167,30 +167,13 @@ def list_of_column_values(search_input):
         i=0
         while i<38:
             value_list=[]
-            for record in same_ID: #<---- goes through this multiple time
-              #  print (value_list)
-               # print(i)
-             #   print(record)
-              #  print (record[i])
-               # print (record[i][0])
+            for record in same_ID:               
                 value_list.append(record[i][0])
-               # print (value_list)
-               # print ('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
-            list_of_columns.append(value_list)
-               # print(len(list_of_columns))
+            list_of_columns.append(value_list)            
             i+=1
-        print (list_of_columns)
-     #   all_IDs_columns.append(list_of_columns)
+        
+        all_IDs_columns.append(list_of_columns)
             
-           # columns_in_specific_customerID_list.append(my_list)
-           # columns.append(columns_in_specific_customerID_list)
-   # print(len(all_IDs_columns))
-
-    for column in all_IDs_columns:
-        print(len(column))
-        print(column)
-        print ('------------------------------------------------')
-
     return all_IDs_columns
 
     
