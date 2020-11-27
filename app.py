@@ -169,12 +169,19 @@ def list_of_column_values(search_input):
             value_list=[]
             for record in same_ID:               
                 value_list.append(record[i][0])
+            value_list = set(value_list)
+            value_list = list(value_list)
             list_of_columns.append(value_list)            
             i+=1
         
         all_IDs_columns.append(list_of_columns)
-            
+
+
+             
     return all_IDs_columns
+
+
+    
 
     
 @app.route('/', methods=  ['GET', 'POST'])
