@@ -160,29 +160,20 @@ def list_of_column_values(search_input):
     # moving each column values into a speperate list
 
     all_IDs_columns=[]
-    
+
+        
     for same_ID in list_of_records:
-        print (same_ID)
         list_of_columns=[]
         i=0
         while i<38:
             value_list=[]
-            for record in same_ID:
+            for record in same_ID:               
                 value_list.append(record[i][0])
-                list_of_columns.append(value_list)
-               # print(len(list_of_columns))
+            list_of_columns.append(value_list)            
             i+=1
+        
         all_IDs_columns.append(list_of_columns)
             
-           # columns_in_specific_customerID_list.append(my_list)
-           # columns.append(columns_in_specific_customerID_list)
-   # print(len(all_IDs_columns))
-
-    for column in all_IDs_columns:
-        print(len(column))
-        print(column)
-        print ('------------------------------------------------')
-
     return all_IDs_columns
 
     
