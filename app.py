@@ -119,7 +119,7 @@ def list_of_column_values(search_input):
     cursor.execute(query2)
     results=cursor.fetchall()
 
-    # extarcing cunstomerIDs of the results
+    # extarcting cunstomerIDs of the results
     list_of_customerID = []
     for result in results:
         list_of_customerID.append(result[0])
@@ -127,7 +127,20 @@ def list_of_column_values(search_input):
     list_of_customerID=set(list_of_customerID)
     list_of_customerID=list(list_of_customerID)
 
-    print (list_of_customerID )
+    results_by_customer_ID=[]
+    results_of_sepcific_customerID=[]
+
+    for customerID_element in list_of_customerID:
+        print(customerID_element)
+        results_of_sepcific_customerID=[]
+        for result in results:
+            
+            if customerID_element==result[0]:
+                results_of_sepcific_customerID.append(result)
+
+        results_by_customer_ID.append(results_of_sepcific_customerID)
+
+    print (results_by_customer_ID)      
         
 
     # turning the result in tuples into list of lists of lists
