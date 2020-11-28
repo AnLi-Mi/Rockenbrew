@@ -37,7 +37,7 @@
     </div>
 
     <div>
-     {% if spcific_record_all_tables %}
+     {% if spcific_record_all_tables, rowspan%}
       <table>
          <tr>
              <th></th>
@@ -82,47 +82,47 @@
          </tr>
          {% for result in spcific_record_all_tables %}
           <tr>
-              <td><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>
-              <td>{{result[0][0]}}</td>
-              <td>{{result[1]}}</td>
-              <td>{{result[2]}}</td>
-              <td>{{result[3]}}</td>
-              <td>{{result[4]}}</td>
-              <td>{{result[5]}}</td>
-              <td>{{result[6]}}</td>
-              <td>{{result[7]}}</td>
-              <td>{{result[8]}}</td>
-              <td>{{result[9]}}</td>
-              <td>{{result[10]}}</td>
-              <td>{{result[11]}}</td>
-              <td>{{result[12]}}</td>
-              <td>{{result[13]}}</td>
-              <td>{{result[14]}}</td>
-              <td>{{result[15]}}</td>
-              <td>{{result[16]}}</td>
-              <td>{{result[17]}}</td>
-              <td>{{result[18]}}</td>
-              <td>{{result[19]}}</td>
-              <td>{{result[20]}}</td>
-              <td>{{result[21]}}</td>
-              <td>{{result[22]}}</td>
-              <td>{{result[23]}}</td>
-              <td>{{result[24]}}</td>
-              <td>{{result[25]}}</td>
-              <td>{{result[26][0]}}</td>
+              <td rowspan='{{rowspan}}'><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>
+              <td rowspan='{{rowspan}}'>{{result[0][0]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[1]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[2]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[3]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[4]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[5]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[6]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[7]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[8]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[9]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[10]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[11]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[12]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[13]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[14]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[15]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[16]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[17]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[18]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[19]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[20]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[21]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[22]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[23]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[24]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[25]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[26][0]}}</td>
 
-              <td>{% for value in result[27] %} {{value}} </br> {% endfor %}</td>
+              <td rowspan='{{rowspan}}'>{% for value in result[27] %} {{value}} </br></br> {% endfor %}</td>
 
-              <td>{% for value in result[28] %} {{value}} </br>  {% endfor %}</td>
-              <td>{{result[29][0]}}</td>
-              <td>{{result[30]}}</td>
-              <td>{{result[31]}}</td>
-              <td>{{result[32]}}</td>
-              <td>{{result[33]}}</td>
-              <td>{{result[34]}}</td>
-              <td>{{result[35]}}</td>
-              <td>{{result[36]}}</td>
-              <td>{{result[37]}}</td>
+              <td rowspan='{{rowspan}}'>{% for value in result[28] %} {{value}} </br></br> {% endfor %}</td>
+              <td rowspan='{{rowspan}}'>{{result[29][0]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[30]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[31]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[32]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[33]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[34]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[35]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[36]}}</td>
+              <td rowspan='{{rowspan}}'>{{result[37]}}</td>
           </tr>
           {% endfor %}
        </table> <br><br><br>
