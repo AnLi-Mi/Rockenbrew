@@ -110,7 +110,7 @@ def list_of_column_values(search_input):
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
+                            WHERE customer.customerID = '{search_input}' or customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     conn = mysql.connect()
     cursor = conn.cursor()
     query1 = 'USE rb_test;'
@@ -134,7 +134,7 @@ def list_of_column_values(search_input):
     for customerID_element in list_of_customerID:
         results_of_sepcific_customerID=[]
         for result in results:
-            
+
             if customerID_element==result[0]:
                 results_of_sepcific_customerID.append(result)
 
@@ -151,38 +151,38 @@ def list_of_column_values(search_input):
             for column in record:
                 column_values =[]
                 column_values.append(column)
-                record_columns.append(column_values)               
+                record_columns.append(column_values)
             same_ID_records.append(record_columns)
         list_of_records.append(same_ID_records)
 
-    
+
 
     # moving each column values into a speperate list
 
     all_IDs_columns=[]
 
-        
+
     for same_ID in list_of_records:
         list_of_columns=[]
         i=0
         while i<38:
             value_list=[]
-            for record in same_ID:               
+            for record in same_ID:
                 value_list.append(record[i][0])
             value_list = set(value_list)
             value_list = list(value_list)
-            list_of_columns.append(value_list)            
+            list_of_columns.append(value_list)
             i+=1
-        
+
         all_IDs_columns.append(list_of_columns)
 
-             
+
     return all_IDs_columns
 
 
-    
 
-    
+
+
 @app.route('/', methods=  ['GET', 'POST'])
 def home_page():
     search_input = ""
@@ -283,8 +283,7 @@ def home_page():
                             WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     all_records_and_tables = display_records(query_all_tables)
     spcific_record_all_tables =  list_of_column_values(search_input)
-    colspan = 2
-    return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables, colspan=colspan)
+    return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():
@@ -722,7 +721,21 @@ def all_keycodes():
 
 @app.route('/edit_record/<customerID>', methods=['GET', 'POST'])
 def edit_record(customerID):
-    display_record = f"""SELECT
+
+    spcific_record_all_tables =  list_of_column_values(customerID)
+
+    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
+
+
+def test_edit_record(customerID):
+
+    spcific_record_all_tables =  list_of_column_values(customerID)
+
+    return spcific_record_all_tables
+
+
+def test_list_of_column_values(search_input):
+    query=                  f"""SELECT
                             customer.customerID,
                             customer.rbCustomerID,
                             customer.companyName,
@@ -768,8 +781,71 @@ def edit_record(customerID):
                             LEFT JOIN contact on contact.customerID=customer.customerID
                             LEFT JOIN adminuser on adminuser.userID=user.userID
                             LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.customerID = {customerID};"""
+                            WHERE customer.customerID = '{search_input}';"""
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query1 = 'USE rb_test;'
+    query2 = query
+    cursor.execute(query1)
+    cursor.execute(query2)
+    results=cursor.fetchall()
 
-    spcific_record_all_tables =  display_records(display_record)
+    # extarcting cunstomerIDs of the results
+    list_of_customerID = []
+    for result in results:
+        list_of_customerID.append(result[0])
 
-    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
+    list_of_customerID=set(list_of_customerID)
+    list_of_customerID=list(list_of_customerID)
+
+    results_by_customer_ID=[]
+    results_of_sepcific_customerID=[]
+
+    #creating a list of lists of results with the same customerID
+    for customerID_element in list_of_customerID:
+        results_of_sepcific_customerID=[]
+        for result in results:
+
+            if customerID_element==result[0]:
+                results_of_sepcific_customerID.append(result)
+
+        results_by_customer_ID.append(results_of_sepcific_customerID)
+
+    results=results_by_customer_ID
+
+    # turning the result in tuples into list of lists of lists
+    list_of_records=[]
+    for same_ID in results:
+        same_ID_records = []
+        for record in same_ID:
+            record_columns =[]
+            for column in record:
+                column_values =[]
+                column_values.append(column)
+                record_columns.append(column_values)
+            same_ID_records.append(record_columns)
+        list_of_records.append(same_ID_records)
+
+
+
+    # moving each column values into a speperate list
+
+    all_IDs_columns=[]
+
+
+    for same_ID in list_of_records:
+        list_of_columns=[]
+        i=0
+        while i<38:
+            value_list=[]
+            for record in same_ID:
+                value_list.append(record[i][0])
+            value_list = set(value_list)
+            value_list = list(value_list)
+            list_of_columns.append(value_list)
+            i+=1
+
+        all_IDs_columns.append(list_of_columns)
+
+
+    return all_IDs_columns

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
 <style>
 div.cell_div {
-    border-top: solid 1px #ccc;
+    border-top: none;
     padding-top: 7px;
 }
 </style>
@@ -42,7 +42,7 @@ div.cell_div {
     </div>
 
     <div>
-     {% if spcific_record_all_tables, rowspan%}
+     {% if spcific_record_all_tables%}
       <table>
          <tr>
              <th></th>
@@ -87,7 +87,7 @@ div.cell_div {
          </tr>
          {% for result in spcific_record_all_tables %}
           <tr>
-              <td><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>              
+              <td><a href="edit_record/{{result[0][0]}}"><button>edit</button></a></td>
               <td>{% for value in result[0] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
               <td>{% for value in result[1] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
               <td>{% for value in result[2] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
