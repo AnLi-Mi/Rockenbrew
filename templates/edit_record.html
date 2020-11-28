@@ -12,11 +12,13 @@
 
 <body>
 
+    <titl>Hello</title>
+
     <div>
         {% if spcific_record_all_tables %}
         {% for result in spcific_record_all_tables %}
 
-        <h2>Edit record {{result[0]}} - {{result[1]}} - {{result[2]}}</h2>
+        <h2>Edit record {{result[0][0]}} - {{result[1][0]}} - {{result[2][0]}}</h2>
 
         <form class="pure-form" name="edit_form" method="POST" action='/'>
             <label>Customer</label></br></br>
