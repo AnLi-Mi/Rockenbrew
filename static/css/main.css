@@ -42,6 +42,12 @@ th {
     border-radius: 4px;
 }
 
+dev.cell_div {
+    color: red;
+    border-top: solid 1px #ccc;
+    padding-top: 7px;
+}
+
 
 td {
    border: solid 1px #ccc;

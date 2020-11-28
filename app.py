@@ -283,7 +283,8 @@ def home_page():
                             WHERE customer.companyName LIKE '%{search_input}%' or customer.rbCustomerID = '{search_input}';"""
     all_records_and_tables = display_records(query_all_tables)
     spcific_record_all_tables =  list_of_column_values(search_input)
-    return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables)
+    colspan = 2
+    return render_template('home_page.html', all_records_and_tables=all_records_and_tables, spcific_record_all_tables=spcific_record_all_tables, colspan=colspan)
 
 @app.route('/full_form', methods=['GET', 'POST'])
 def full_form():

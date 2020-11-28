@@ -7,7 +7,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-
+<style>
+div.cell_div {
+    border-top: solid 1px #ccc;
+    padding-top: 7px;
+}
+</style>
 </head>
 
 <h1> Rockenbrew CRM </h1>
@@ -37,7 +42,7 @@
     </div>
 
     <div>
-     {% if spcific_record_all_tables %}
+     {% if spcific_record_all_tables, rowspan%}
       <table>
          <tr>
              <th></th>
@@ -82,47 +87,46 @@
          </tr>
          {% for result in spcific_record_all_tables %}
           <tr>
-              <td><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>
-              <td>{{result[0][0]}}</td>
-              <td>{{result[1]}}</td>
-              <td>{{result[2]}}</td>
-              <td>{{result[3]}}</td>
-              <td>{{result[4]}}</td>
-              <td>{{result[5]}}</td>
-              <td>{{result[6]}}</td>
-              <td>{{result[7]}}</td>
-              <td>{{result[8]}}</td>
-              <td>{{result[9]}}</td>
-              <td>{{result[10]}}</td>
-              <td>{{result[11]}}</td>
-              <td>{{result[12]}}</td>
-              <td>{{result[13]}}</td>
-              <td>{{result[14]}}</td>
-              <td>{{result[15]}}</td>
-              <td>{{result[16]}}</td>
-              <td>{{result[17]}}</td>
-              <td>{{result[18]}}</td>
-              <td>{{result[19]}}</td>
-              <td>{{result[20]}}</td>
-              <td>{{result[21]}}</td>
-              <td>{{result[22]}}</td>
-              <td>{{result[23]}}</td>
-              <td>{{result[24]}}</td>
-              <td>{{result[25]}}</td>
-              <td>{{result[26][0]}}</td>
+              <td><a href="edit_record/{{result[0]}}"><button>edit</button></a></td>              
+              <td>{% for value in result[0] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[1] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[2] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[3] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[4] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[5] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[6] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[7] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[8] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[9] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[10] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[11] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[12] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[13] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[14] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[15] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[16] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[17] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[18] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[19] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[20] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[21] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[22] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[23] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[24] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[25] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[26] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[27] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[28] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[29] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[30] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[31] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[32] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[33] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[34] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[35] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[36] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
+              <td>{% for value in result[37] %} <div class="cell_div">{{value}}</div> {% endfor %}</td>
 
-              <td>{% for value in result[27] %} {{value}} </br> {% endfor %}</td>
-
-              <td>{% for value in result[28] %} {{value}} </br>  {% endfor %}</td>
-              <td>{{result[29][0]}}</td>
-              <td>{{result[30]}}</td>
-              <td>{{result[31]}}</td>
-              <td>{{result[32]}}</td>
-              <td>{{result[33]}}</td>
-              <td>{{result[34]}}</td>
-              <td>{{result[35]}}</td>
-              <td>{{result[36]}}</td>
-              <td>{{result[37]}}</td>
           </tr>
           {% endfor %}
        </table> <br><br><br>
