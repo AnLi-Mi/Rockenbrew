@@ -57,15 +57,11 @@
             userDomicile*: <input type="text" maxlength="2" name="userDomicile" value={{result[25][0]}} required></br></br></br></br>
 
             <label>Contact</label></br></br>
-            {% for value in result[26] %}
-            contactID: <input type="number" name="contactID" value={{value}} disabled></br></br>
-            {% endfor %}
-            {% for value in result[27] %}
-            contactType*: <input type="number" name="contactType" value={{value}}  required></br></br>
-            {% endfor %}
-            {% for value in result[28] %}
-            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value={{value}} required></br></br>
-            {% endfor %}
+
+            contactID: <input type="text" name="contactID" value="{% for value in result[26] %}{{value}} {% endfor %}" disabled></br></br>
+            contactType*: <input type="text" name="contactType" value="{% for value in result[27] %}{{value}} {% endfor %}"   required></br></br>
+            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value="{% for value in result[28] %}{{value}} {% endfor %}" required></br></br>
+
 
             </br></br>
 
