@@ -298,6 +298,7 @@ def full_form():
     value=''
     frequency=''
     firstPaymentDate=''
+    paymentScheduleStartDate=''
     lastPaymentDate=''
     active=''
     customerID=''
@@ -343,6 +344,9 @@ def full_form():
         value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
+        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
+        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
+            paymentScheduleStartDate=date.today()
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
 
@@ -402,7 +406,7 @@ def full_form():
                     VALUES ('{value}',
                             '{frequency}',
                             '{firstPaymentDate}',
-                            '{startDate}',
+                            '{paymentScheduleStartDate}',
                             '{lastPaymentDate}',
                             '{active}',
                             '{customerID}');"""
@@ -516,6 +520,7 @@ def paymentschedule_form():
     value=''
     frequency=''
     firstPaymentDate=''
+    paymentScheduleStartDate=''
     lastPaymentDate=''
     active=''
     customerID=''
@@ -523,6 +528,7 @@ def paymentschedule_form():
         value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
+        paymentScheduleStartDate=request.form.get('paymentScheduleStartDate')
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
         customerID=request.form.get('customerID')
@@ -537,7 +543,7 @@ def paymentschedule_form():
                         VALUES ('{value}',
                                 '{frequency}',
                                 '{firstPaymentDate}',
-                                '{startDate}',
+                                '{paymentScheduleStartDate}',
                                 '{lastPaymentDate}',
                                 '{active}',
                                 '{customerID}');"""
