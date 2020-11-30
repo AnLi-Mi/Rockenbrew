@@ -57,9 +57,17 @@
             userDomicile*: <input type="text" maxlength="2" name="userDomicile" value={{result[25][0]}} required></br></br></br></br>
 
             <label>Contact</label></br></br>
-            contactID: <input type="number" name="contactID" value={{result[26][0]}} disabled></br></br>
-            contactType*: <input type="number" name="contactType" value={{result[27][0]}}  required></br></br>
-            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value={{result[28][0]}} required></br></br></br></br>
+            {% for value in result[26] %}
+            contactID: <input type="number" name="contactID" value={{value}} disabled></br></br>
+            {% endfor %}
+            {% for value in result[27] %}
+            contactType*: <input type="number" name="contactType" value={{value}}  required></br></br>
+            {% endfor %}
+            {% for value in result[28] %}
+            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value={{value}} required></br></br>
+            {% endfor %}
+
+            </br></br>
 
             <label>AdminUser</label></br></br>
             adminUserID: <input type="number" name="adminUserID" value={{result[29][0]}}  disabled></br></br>
