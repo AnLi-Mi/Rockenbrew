@@ -730,6 +730,102 @@ def edit_record(customerID):
 
     spcific_record_all_tables =  list_of_column_values(customerID)
 
+    companyName=''
+    companyLocalID=''
+    companyLocalIDType=''
+    custTypeID=''
+    startDate=''
+    domicile=''
+
+    value=''
+    frequency=''
+    firstPaymentDate=''
+    paymentScheduleStartDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
+
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
+
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    licenceID=''
+
+    contactType=''
+    contactDetail=''
+    userID=''
+
+    password=''
+    paymentContact=''
+    level=''
+
+    keyCodeVersion=''
+    keyCode=''
+    codeActive=''
+    codeActivationDate=''
+
+    if request.method == 'POST' and 'rbCustomerID' in request.form:
+
+        companyName=request.form.get('companyName')
+        companyLocalID=request.form.get('companyLocalID')
+        companyLocalIDType=request.form.get('companyLocalIDType')
+        custTypeID=request.form.get('custTypeID')
+        startDate=request.form.get('startDate')
+        if startDate==None or startDate=='':
+            startDate=date.today()
+        domicile=request.form.get('domicile')
+
+        value=request.form.get('value')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
+        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
+            paymentScheduleStartDate=date.today()
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
+
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
+
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
+
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
+
+        password=request.form.get('password')
+        paymentContact=request.form.get('paymentContact')
+        level=request.form.get('level')
+
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        codeActive=request.form.get('codeActive')
+        codeActivationDate=request.form.get('codeActivationDate')
+
+        query_upadte_customer = f"""UPDATE rb_test.customer
+                            SET
+                            rbCustomerID = '{rbCustomerID}',
+                            companyName = '{companyName}',
+                            companyLocalID = '{companyLocalID},
+                            companyLocalIDType = '{companyLocalIDType}',
+                            custTypeID = '{custTypeID}',
+                            startDate = '{startDate}',
+                            domicile = '{domicile}'
+                            WHERE customerID={customerID};"""
+        insert_query(query_upadte_customer)
+
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
 
 
