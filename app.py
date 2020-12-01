@@ -27,6 +27,8 @@ def connect_msql():
 def insert_query(query):
     conn = mysql.connect()
     cursor = conn.cursor()
+    query1 = 'USE rb_test;'
+    cursor.execute(query1)
     cursor.execute(query)
     conn.commit()
 
@@ -728,8 +730,63 @@ def all_keycodes():
 @app.route('/edit_record/<customerID>', methods=['GET', 'POST'])
 def edit_record(customerID):
 
-    spcific_record_all_tables =  list_of_column_values(customerID)
+    query=                  f"""SELECT
+                            customer.customerID,
+                            customer.rbCustomerID,
+                            customer.companyName,
+                            customer.companyLocalID,
+                            customer.companyLocalIDType,
+                            customer.custTypeID,
+                            customer.startDate,
+                            customer.domicile,
+                            paymentschedule.paymentScheduleID,
+                            paymentschedule.value as payment_value,
+                            paymentschedule.frequency as payment_frequency,
+                            paymentschedule.firstPaymentDate,
+                            paymentschedule.startDate,
+                            paymentschedule.lastPaymentDate,
+                            paymentschedule.active,
+                            licence.licenceID,
+                            licence.type,
+                            licence.issueDate,
+                            licence.validFrom,
+                            licence.validTo,
+                            licence.activationCode,
+                            user.userID,
+                            user.startDate,
+                            user.username,
+                            user.city,
+                            user.domicile,
+                            contact.contactID,
+                            contact.type,
+                            contact.detail,
+                            adminuser.adminUserID,
+                            adminuser.password,
+                            adminuser.paymentContact,
+                            adminuser.level,
+                            keycode.keyCodeID,
+                            keycode.keyCodeVersion,
+                            keycode.keyCode,
+                            keycode.active,
+                            keycode.date
+                            FROM customer
+                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
+                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
+                            LEFT JOIN user on user.customerID=licence.customerID
+                            LEFT JOIN contact on contact.customerID=customer.customerID
+                            LEFT JOIN adminuser on adminuser.userID=user.userID
+                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID
+                            WHERE customer.customerID = '{customerID}';"""
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    query1 = 'USE rb_test;'
+    query2 = query
+    cursor.execute(query1)
+    cursor.execute(query2)
+    spcific_record_all_tables=cursor.fetchall()
 
+    #spcific_record_all_tables =  list_of_column_values(customerID)
+    rbCustomerID = ''
     companyName=''
     companyLocalID=''
     companyLocalIDType=''
@@ -737,42 +794,42 @@ def edit_record(customerID):
     startDate=''
     domicile=''
 
-    value=''
-    frequency=''
-    firstPaymentDate=''
-    paymentScheduleStartDate=''
-    lastPaymentDate=''
-    active=''
-    customerID=''
+#    value=''
+#    frequency=''
+#    firstPaymentDate=''
+#    paymentScheduleStartDate=''
+#    lastPaymentDate=''
+#    active=''
+#    customerID=''
 
-    type=''
-    issueDate=''
-    validFrom=''
-    validTo=''
-    activationCode=''
-    paymentScheduleID=''
+#    type=''
+#    issueDate=''
+#    validFrom=''
+#    validTo=''
+#    activationCode=''
+#    paymentScheduleID=''
 
-    userStartDate=''
-    username=''
-    city=''
-    userDomicile=''
-    licenceID=''
+#    userStartDate=''
+#    username=''
+#    city=''
+#    userDomicile=''
+#    licenceID=''
 
-    contactType=''
-    contactDetail=''
-    userID=''
+#    contactType=''
+#    contactDetail=''
+#    userID=''
 
-    password=''
-    paymentContact=''
-    level=''
+#    password=''
+#    paymentContact=''
+#    level=''
 
-    keyCodeVersion=''
-    keyCode=''
-    codeActive=''
-    codeActivationDate=''
+#    keyCodeVersion=''
+#    keyCode=''
+#    codeActive=''
+#    codeActivationDate=''
 
-    if request.method == 'POST' and 'rbCustomerID' in request.form:
-
+    if request.method == 'POST' and 'companyName' in request.form:
+        rbCustomerID =request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
@@ -782,43 +839,42 @@ def edit_record(customerID):
             startDate=date.today()
         domicile=request.form.get('domicile')
 
-        value=request.form.get('value')
-        frequency=request.form.get('frequency')
-        firstPaymentDate=request.form.get('firstPaymentDate')
-        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
-        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
-            paymentScheduleStartDate=date.today()
-        lastPaymentDate=request.form.get('lastPaymentDate')
-        active=request.form.get('active')
+#        value=request.form.get('value')
+#        frequency=request.form.get('frequency')
+#        firstPaymentDate=request.form.get('firstPaymentDate')
+#        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
+#        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
+#            paymentScheduleStartDate=date.today()
+#        lastPaymentDate=request.form.get('lastPaymentDate')
+#        active=request.form.get('active')
 
-        type=request.form.get('type')
-        issueDate=request.form.get('issueDate')
-        validFrom=request.form.get('validFrom')
-        validTo=request.form.get('validTo')
-        activationCode=request.form.get('activationCode')
+#        type=request.form.get('type')
+#        issueDate=request.form.get('issueDate')
+#        validFrom=request.form.get('validFrom')
+#        validTo=request.form.get('validTo')
+#        activationCode=request.form.get('activationCode')
 
-        userStartDate=request.form.get('userStartDate')
-        username=request.form.get('username')
-        city=request.form.get('city')
-        userDomicile=request.form.get('userDomicile')
+#        userStartDate=request.form.get('userStartDate')
+#        username=request.form.get('username')
+#        city=request.form.get('city')
+#        userDomicile=request.form.get('userDomicile')
 
-        contactType=request.form.get('contactType')
-        contactDetail=request.form.get('contactDetail')
+#        contactType=request.form.get('contactType')
+#        contactDetail=request.form.get('contactDetail')
 
-        password=request.form.get('password')
-        paymentContact=request.form.get('paymentContact')
-        level=request.form.get('level')
+#        password=request.form.get('password')
+#        paymentContact=request.form.get('paymentContact')
+#        level=request.form.get('level')
 
-        keyCodeVersion=request.form.get('keyCodeVersion')
-        keyCode=request.form.get('keyCode')
-        codeActive=request.form.get('codeActive')
-        codeActivationDate=request.form.get('codeActivationDate')
-
+#        keyCodeVersion=request.form.get('keyCodeVersion')
+#        keyCode=request.form.get('keyCode')
+#        codeActive=request.form.get('codeActive')
+#        codeActivationDate=request.form.get('codeActivationDate')
         query_upadte_customer = f"""UPDATE rb_test.customer
                             SET
                             rbCustomerID = '{rbCustomerID}',
                             companyName = '{companyName}',
-                            companyLocalID = '{companyLocalID},
+                            companyLocalID = '{companyLocalID}',
                             companyLocalIDType = '{companyLocalIDType}',
                             custTypeID = '{custTypeID}',
                             startDate = '{startDate}',
@@ -826,7 +882,7 @@ def edit_record(customerID):
                             WHERE customerID={customerID};"""
         insert_query(query_upadte_customer)
 
-    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
+    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
 def test_edit_record(customerID):
