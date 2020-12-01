@@ -826,7 +826,7 @@ def edit_record(customerID):
 #    codeActive=''
 #    codeActivationDate=''
 
-    if request.method == 'POST' and 'rbCustomerID' in request.form:
+    if request.method == 'POST' and 'companyName' in request.form:
 
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
