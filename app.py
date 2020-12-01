@@ -816,13 +816,13 @@ def edit_record(customerID):
 
         query_upadte_cumstomer = f"""UPDATE rb_test.customer
                             SET
-                            rbCustomerID = {rbCustomerID},
-                            companyName = {companyName},
-                            companyLocalID = {companyLocalID},
-                            companyLocalIDType = {companyLocalIDType},
-                            custTypeID = {custTypeID},
-                            startDate = {startDate},
-                            domicile = {domicile}
+                            rbCustomerID = '{rbCustomerID}',
+                            companyName = '{companyName}',
+                            companyLocalID = '{companyLocalID},
+                            companyLocalIDType = '{companyLocalIDType}',
+                            custTypeID = '{custTypeID}',
+                            startDate = '{startDate}',
+                            domicile = '{domicile}'
                             WHERE customerID={customerID};"""
         insert_query(query_upadte_cumstomer)
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
