@@ -870,7 +870,6 @@ def edit_record(customerID):
 #        keyCode=request.form.get('keyCode')
 #        codeActive=request.form.get('codeActive')
 #        codeActivationDate=request.form.get('codeActivationDate')
-
         query_upadte_customer = f"""UPDATE rb_test.customer
                             SET
                             rbCustomerID = '{rbCustomerID}',
@@ -883,7 +882,7 @@ def edit_record(customerID):
                             WHERE customerID={customerID};"""
         insert_query(query_upadte_customer)
 
-    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
+    return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
 
 
 def test_edit_record(customerID):
