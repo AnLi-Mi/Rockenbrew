@@ -32,7 +32,7 @@
             startDate: <input type="date" name="startDate" value={{result[6][0]}}></br></br>
             domicile*: <input type="text" name="domicile" maxlength="2" value={{result[7][0]}} required></br></br></br></br>
 
-            <label>PaymentSchedule</label></br></br>
+        <!--    <label>PaymentSchedule</label></br></br>
             paymentScheduleID: <input type="number" name="paymentScheduleID" value={{result[8][0]}} disabled></br></br>
             value*: <input type="number" name="value" step="0.01" value={{result[9][0]}} required ></br></br>
             frequency in days*: <input type="number" name="frequency" step="0.01" value={{result[10][0]}} required></br></br>
@@ -58,9 +58,9 @@
 
             <label>Contact</label></br></br>
 
-            contactID: <input type="text" name="contactID" value="{% for value in result[26] %}{{value}} {% endfor %}" disabled></br></br>
-            contactType*: <input type="text" name="contactType" value="{% for value in result[27] %}{{value}} {% endfor %}"   required></br></br>
-            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value="{% for value in result[28] %}{{value}} {% endfor %}" required></br></br>
+            contactID: <input type="number" name="contactID" value={{result[26][0]}} disabled></br></br>
+            contactType*: <input type="text" name="contactType" value={{result[27][0]}}   required></br></br>
+            contactDetail*: <input type="text" maxlength="500" name="contactDetail" value={{result[28][0]}} required></br></br>
 
 
             </br></br>
@@ -76,7 +76,8 @@
             keyCodeVersion*: <input type="number" name="keyCodeVersion" value={{result[34][0]}} required></br></br>
             keyCode*: <input type="text" name="keyCode" maxlength="200" value={{result[35][0]}} required></br></br>
             keyCodeActive*: <input type="number" name="codeActive" value={{result[36][0]}} required></br></br>
-            keyCodeActivationDate: <input type="date" name="codeActivationDate" value={{result[37][0]}}></br></br></br></br>
+            keyCodeActivationDate: <input type="date" name="codeActivationDate" value={{result[37][0]}}></br></br> -->
+        </br></br>
 
             <button type="submit" value="submit">Submit</button></br></br></br></br>
         </form> </br></br>
