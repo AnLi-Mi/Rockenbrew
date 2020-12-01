@@ -27,6 +27,8 @@ def connect_msql():
 def insert_query(query):
     conn = mysql.connect()
     cursor = conn.cursor()
+    query1 = 'USE rb_test;'
+    cursor.execute(query1)
     cursor.execute(query)
     conn.commit()
 
@@ -784,7 +786,7 @@ def edit_record(customerID):
     spcific_record_all_tables=cursor.fetchall()
 
     #spcific_record_all_tables =  list_of_column_values(customerID)
-
+    rbCustomerID = ''
     companyName=''
     companyLocalID=''
     companyLocalIDType=''
@@ -827,7 +829,7 @@ def edit_record(customerID):
 #    codeActivationDate=''
 
     if request.method == 'POST' and 'companyName' in request.form:
-
+        rbCustomerID =request.form.get('rbCustomerID')
         companyName=request.form.get('companyName')
         companyLocalID=request.form.get('companyLocalID')
         companyLocalIDType=request.form.get('companyLocalIDType')
@@ -873,7 +875,7 @@ def edit_record(customerID):
                             SET
                             rbCustomerID = '{rbCustomerID}',
                             companyName = '{companyName}',
-                            companyLocalID = '{companyLocalID},
+                            companyLocalID = '{companyLocalID}',
                             companyLocalIDType = '{companyLocalIDType}',
                             custTypeID = '{custTypeID}',
                             startDate = '{startDate}',
