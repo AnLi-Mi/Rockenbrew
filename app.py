@@ -814,7 +814,7 @@ def edit_record(customerID):
         codeActive=request.form.get('codeActive')
         codeActivationDate=request.form.get('codeActivationDate')
 
-        query_upadte_cumstomer = f"""UPDATE rb_test.customer
+        query_upadte_customer = f"""UPDATE rb_test.customer
                             SET
                             rbCustomerID = '{rbCustomerID}',
                             companyName = '{companyName}',
@@ -824,7 +824,8 @@ def edit_record(customerID):
                             startDate = '{startDate}',
                             domicile = '{domicile}'
                             WHERE customerID={customerID};"""
-        insert_query(query_upadte_cumstomer)
+        insert_query(query_upadte_customer)
+
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables)
 
 
