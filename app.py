@@ -794,13 +794,13 @@ def edit_record(customerID):
     startDate=''
     domicile=''
 
-#    value=''
-#    frequency=''
-#    firstPaymentDate=''
-#    paymentScheduleStartDate=''
-#    lastPaymentDate=''
-#    active=''
-#    customerID=''
+    value=''
+    frequency=''
+    firstPaymentDate=''
+    paymentScheduleStartDate=''
+    lastPaymentDate=''
+    active=''
+    customerID=''
 
 #    type=''
 #    issueDate=''
@@ -839,14 +839,14 @@ def edit_record(customerID):
             startDate=date.today()
         domicile=request.form.get('domicile')
 
-#        value=request.form.get('value')
-#        frequency=request.form.get('frequency')
-#        firstPaymentDate=request.form.get('firstPaymentDate')
-#        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
-#        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
-#            paymentScheduleStartDate=date.today()
-#        lastPaymentDate=request.form.get('lastPaymentDate')
-#        active=request.form.get('active')
+        value=request.form.get('value')
+        frequency=request.form.get('frequency')
+        firstPaymentDate=request.form.get('firstPaymentDate')
+        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
+        if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
+            paymentScheduleStartDate=date.today()
+        lastPaymentDate=request.form.get('lastPaymentDate')
+        active=request.form.get('active')
 
 #        type=request.form.get('type')
 #        issueDate=request.form.get('issueDate')
@@ -880,130 +880,18 @@ def edit_record(customerID):
                             startDate = '{startDate}',
                             domicile = '{domicile}'
                             WHERE customerID={customerID};"""
+        query_upadte_paymentschedule = f"""UPDATE rb_test.paymentschedule
+                            SET
+                            value= '{value}'
+                            frequency= '{frequency}'
+                            firstPaymentDate= '{firstPaymentDate}'
+                            startDate= '{paymentScheduleStartDate}'
+                            lastPaymentDate= '{lastPaymentDate}'
+                            active= '{active}'
+                            customerID= '{customerID}'
+                            WHERE customerID={customerID};"""
         insert_query(query_upadte_customer)
+        insert_query(query_upadte_paymentschedule)
+
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
-
-
-def test_edit_record(customerID):
-
-    spcific_record_all_tables =  list_of_column_values(customerID)
-
-    return spcific_record_all_tables
-
-
-def test_list_of_column_values(search_input):
-    query=                  f"""SELECT
-                            customer.customerID,
-                            customer.rbCustomerID,
-                            customer.companyName,
-                            customer.companyLocalID,
-                            customer.companyLocalIDType,
-                            customer.custTypeID,
-                            customer.startDate,
-                            customer.domicile,
-                            paymentschedule.paymentScheduleID,
-                            paymentschedule.value as payment_value,
-                            paymentschedule.frequency as payment_frequency,
-                            paymentschedule.firstPaymentDate,
-                            paymentschedule.startDate,
-                            paymentschedule.lastPaymentDate,
-                            paymentschedule.active,
-                            licence.licenceID,
-                            licence.type,
-                            licence.issueDate,
-                            licence.validFrom,
-                            licence.validTo,
-                            licence.activationCode,
-                            user.userID,
-                            user.startDate,
-                            user.username,
-                            user.city,
-                            user.domicile,
-                            contact.contactID,
-                            contact.type,
-                            contact.detail,
-                            adminuser.adminUserID,
-                            adminuser.password,
-                            adminuser.paymentContact,
-                            adminuser.level,
-                            keycode.keyCodeID,
-                            keycode.keyCodeVersion,
-                            keycode.keyCode,
-                            keycode.active,
-                            keycode.date
-                            FROM customer
-                            LEFT JOIN paymentschedule on customer.customerID=paymentschedule.customerID
-                            LEFT JOIN licence on licence.customerID=paymentschedule.customerID
-                            LEFT JOIN user on user.customerID=licence.customerID
-                            LEFT JOIN contact on contact.customerID=customer.customerID
-                            LEFT JOIN adminuser on adminuser.userID=user.userID
-                            LEFT JOIN keycode on keycode.licenceID=licence.licenceID
-                            WHERE customer.customerID = '{search_input}';"""
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    query1 = 'USE rb_test;'
-    query2 = query
-    cursor.execute(query1)
-    cursor.execute(query2)
-    results=cursor.fetchall()
-
-    # extarcting cunstomerIDs of the results
-    list_of_customerID = []
-    for result in results:
-        list_of_customerID.append(result[0])
-
-    list_of_customerID=set(list_of_customerID)
-    list_of_customerID=list(list_of_customerID)
-
-    results_by_customer_ID=[]
-    results_of_sepcific_customerID=[]
-
-    #creating a list of lists of results with the same customerID
-    for customerID_element in list_of_customerID:
-        results_of_sepcific_customerID=[]
-        for result in results:
-
-            if customerID_element==result[0]:
-                results_of_sepcific_customerID.append(result)
-
-        results_by_customer_ID.append(results_of_sepcific_customerID)
-
-    results=results_by_customer_ID
-
-    # turning the result in tuples into list of lists of lists
-    list_of_records=[]
-    for same_ID in results:
-        same_ID_records = []
-        for record in same_ID:
-            record_columns =[]
-            for column in record:
-                column_values =[]
-                column_values.append(column)
-                record_columns.append(column_values)
-            same_ID_records.append(record_columns)
-        list_of_records.append(same_ID_records)
-
-
-
-    # moving each column values into a speperate list
-
-    all_IDs_columns=[]
-
-
-    for same_ID in list_of_records:
-        list_of_columns=[]
-        i=0
-        while i<38:
-            value_list=[]
-            for record in same_ID:
-                value_list.append(record[i][0])
-            value_list = set(value_list)
-            value_list = list(value_list)
-            list_of_columns.append(value_list)
-            i+=1
-
-        all_IDs_columns.append(list_of_columns)
-
-
-    return all_IDs_columns
