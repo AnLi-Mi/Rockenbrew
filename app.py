@@ -886,7 +886,8 @@ def edit_record(customerID):
                             firstPaymentDate= '{firstPaymentDate}',
                             startDate= '{paymentScheduleStartDate}',
                             lastPaymentDate= '{lastPaymentDate}',
-                            active= '{active}''
+                            active= '{active}',
+                            customerID='{customerID}'
                             WHERE customerID={customerID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
