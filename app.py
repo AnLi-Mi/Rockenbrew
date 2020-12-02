@@ -800,7 +800,6 @@ def edit_record(customerID):
     paymentScheduleStartDate=''
     lastPaymentDate=''
     active=''
-    customerID=''
 
 #    type=''
 #    issueDate=''
@@ -842,7 +841,7 @@ def edit_record(customerID):
         value=request.form.get('value')
         frequency=request.form.get('frequency')
         firstPaymentDate=request.form.get('firstPaymentDate')
-        paymentScheduleStartDate=request.get('paymentScheduleStartDate')
+        paymentScheduleStartDate=request.form.get('paymentScheduleStartDate')
         if paymentScheduleStartDate==None or paymentScheduleStartDate=='':
             paymentScheduleStartDate=date.today()
         lastPaymentDate=request.form.get('lastPaymentDate')
@@ -882,13 +881,12 @@ def edit_record(customerID):
                             WHERE customerID={customerID};"""
         query_upadte_paymentschedule = f"""UPDATE rb_test.paymentschedule
                             SET
-                            value= '{value}'
-                            frequency= '{frequency}'
-                            firstPaymentDate= '{firstPaymentDate}'
-                            startDate= '{paymentScheduleStartDate}'
-                            lastPaymentDate= '{lastPaymentDate}'
-                            active= '{active}'
-                            customerID= '{customerID}'
+                            value= '{value}',
+                            frequency= '{frequency}',
+                            firstPaymentDate= '{firstPaymentDate}',
+                            startDate= '{paymentScheduleStartDate}',
+                            lastPaymentDate= '{lastPaymentDate}',
+                            active= '{active}''
                             WHERE customerID={customerID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
