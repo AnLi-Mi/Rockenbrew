@@ -822,10 +822,10 @@ def edit_record(customerID):
     paymentContact=''
     level=''
 
-#    keyCodeVersion=''
-#    keyCode=''
-#    codeActive=''
-#    codeActivationDate=''
+    keyCodeVersion=''
+    keyCode=''
+    codeActive=''
+    codeActivationDate=''
 
     if request.method == 'POST' and 'companyName' in request.form:
         rbCustomerID =request.form.get('rbCustomerID')
@@ -867,10 +867,12 @@ def edit_record(customerID):
         paymentContact=request.form.get('paymentContact')
         level=request.form.get('level')
 
-#        keyCodeVersion=request.form.get('keyCodeVersion')
-#        keyCode=request.form.get('keyCode')
-#        codeActive=request.form.get('codeActive')
-#        codeActivationDate=request.form.get('codeActivationDate')
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        codeActive=request.form.get('codeActive')
+        codeActivationDate=request.form.get('codeActivationDate')
+
+        licenceID = spcific_record_all_tables[15][0]
         query_upadte_customer = f"""UPDATE rb_test.customer
                             SET
                             rbCustomerID = '{rbCustomerID}',
@@ -917,11 +919,19 @@ def edit_record(customerID):
                             paymentContact= '{paymentContact}',
                             level= '{level}',
                             WHERE userID={userID};"""
+        query_upadte_keycode = f"""UPDATE rb_test.keycode
+                            SET
+                            keyCodeVersion= '{keyCodeVersion}',
+                            keyCode= '{keyCode}',
+                            codeActive= '{codeActive}',
+                            codeActivationDate= '{codeActivationDate}',
+                            WHERE licenceID={licenceID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
         insert_query(query_upadte_licence)
         insert_query(query_upadte_user)
         insert_query(query_upadte_contact)
         insert_query(query_upadte_adminuser)
+        insert_query(query_upadte_keycode)
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
