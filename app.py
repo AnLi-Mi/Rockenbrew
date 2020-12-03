@@ -808,11 +808,11 @@ def edit_record(customerID):
     activationCode=''
     paymentScheduleID=''
 
-#    userStartDate=''
-#    username=''
-#    city=''
-#    userDomicile=''
-#    licenceID=''
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    licenceID=''
 
 #    contactType=''
 #    contactDetail=''
@@ -853,10 +853,10 @@ def edit_record(customerID):
         validTo=request.form.get('validTo')
         activationCode=request.form.get('activationCode')
 
-#        userStartDate=request.form.get('userStartDate')
-#        username=request.form.get('username')
-#        city=request.form.get('city')
-#        userDomicile=request.form.get('userDomicile')
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
 
 #        contactType=request.form.get('contactType')
 #        contactDetail=request.form.get('contactDetail')
@@ -897,9 +897,16 @@ def edit_record(customerID):
                             validTo= '{validTo}',
                             activationCode= '{activationCode}',
                             HERE customerID={customerID};"""
+        query_upadte_user = f"""UPDATE rb_test.user
+                            SET
+                            userStartDate= '{userStartDate}',
+                            username= '{username}',
+                            city= '{city}',
+                            userDomicile= '{userDomicile}',
+                            HERE customerID={customerID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
         insert_query(query_upadte_licence)
-
+        insert_query(query_upadte_user)
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
