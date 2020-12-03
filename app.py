@@ -801,31 +801,31 @@ def edit_record(customerID):
     lastPaymentDate=''
     active=''
 
-#    type=''
-#    issueDate=''
-#    validFrom=''
-#    validTo=''
-#    activationCode=''
-#    paymentScheduleID=''
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
 
-#    userStartDate=''
-#    username=''
-#    city=''
-#    userDomicile=''
-#    licenceID=''
+    userStartDate=''
+    username=''
+    city=''
+    userDomicile=''
+    licenceID=''
 
-#    contactType=''
-#    contactDetail=''
-#    userID=''
+    contactType=''
+    contactDetail=''
+    userID=''
 
-#    password=''
-#    paymentContact=''
-#    level=''
+    password=''
+    paymentContact=''
+    level=''
 
-#    keyCodeVersion=''
-#    keyCode=''
-#    codeActive=''
-#    codeActivationDate=''
+    keyCodeVersion=''
+    keyCode=''
+    codeActive=''
+    codeActivationDate=''
 
     if request.method == 'POST' and 'companyName' in request.form:
         rbCustomerID =request.form.get('rbCustomerID')
@@ -847,28 +847,32 @@ def edit_record(customerID):
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
 
-#        type=request.form.get('type')
-#        issueDate=request.form.get('issueDate')
-#        validFrom=request.form.get('validFrom')
-#        validTo=request.form.get('validTo')
-#        activationCode=request.form.get('activationCode')
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
 
-#        userStartDate=request.form.get('userStartDate')
-#        username=request.form.get('username')
-#        city=request.form.get('city')
-#        userDomicile=request.form.get('userDomicile')
+        userStartDate=request.form.get('userStartDate')
+        username=request.form.get('username')
+        city=request.form.get('city')
+        userDomicile=request.form.get('userDomicile')
 
-#        contactType=request.form.get('contactType')
-#        contactDetail=request.form.get('contactDetail')
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
 
-#        password=request.form.get('password')
-#        paymentContact=request.form.get('paymentContact')
-#        level=request.form.get('level')
+        userID = spcific_record_all_tables[21][0]
 
-#        keyCodeVersion=request.form.get('keyCodeVersion')
-#        keyCode=request.form.get('keyCode')
-#        codeActive=request.form.get('codeActive')
-#        codeActivationDate=request.form.get('codeActivationDate')
+        password=request.form.get('password')
+        paymentContact=request.form.get('paymentContact')
+        level=request.form.get('level')
+
+        keyCodeVersion=request.form.get('keyCodeVersion')
+        keyCode=request.form.get('keyCode')
+        codeActive=request.form.get('codeActive')
+        codeActivationDate=request.form.get('codeActivationDate')
+
+        licenceID = spcific_record_all_tables[15][0]
         query_upadte_customer = f"""UPDATE rb_test.customer
                             SET
                             rbCustomerID = '{rbCustomerID}',
@@ -889,8 +893,45 @@ def edit_record(customerID):
                             active= '{active}',
                             customerID='{customerID}'
                             WHERE customerID={customerID};"""
+        query_upadte_licence = f"""UPDATE rb_test.licence
+                            SET
+                            type= '{type}',
+                            issueDate= '{issueDate}',
+                            validFrom= '{validFrom}',
+                            validTo= '{validTo}',
+                            activationCode= '{activationCode}',
+                            WHERE customerID={customerID};"""
+        query_upadte_user = f"""UPDATE rb_test.user
+                            SET
+                            userStartDate= '{userStartDate}',
+                            username= '{username}',
+                            city= '{city}',
+                            userDomicile= '{userDomicile}',
+                            WHERE customerID={customerID};"""
+        query_upadte_contact = f"""UPDATE rb_test.contact
+                            SET
+                            contactType= '{contactType}',
+                            contactDetail= '{contactDetail}',
+                            WHERE userID={userID};"""
+        query_upadte_adminuser = f"""UPDATE rb_test.adminuser
+                            SET
+                            password= '{password}',
+                            paymentContact= '{paymentContact}',
+                            level= '{level}',
+                            WHERE userID={userID};"""
+        query_upadte_keycode = f"""UPDATE rb_test.keycode
+                            SET
+                            keyCodeVersion= '{keyCodeVersion}',
+                            keyCode= '{keyCode}',
+                            codeActive= '{codeActive}',
+                            codeActivationDate= '{codeActivationDate}',
+                            WHERE licenceID={licenceID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
-
+        insert_query(query_upadte_licence)
+        insert_query(query_upadte_user)
+        insert_query(query_upadte_contact)
+        insert_query(query_upadte_adminuser)
+        insert_query(query_upadte_keycode)
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
