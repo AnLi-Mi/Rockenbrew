@@ -814,9 +814,9 @@ def edit_record(customerID):
     userDomicile=''
     licenceID=''
 
-#    contactType=''
-#    contactDetail=''
-#    userID=''
+    contactType=''
+    contactDetail=''
+    userID=''
 
 #    password=''
 #    paymentContact=''
@@ -858,8 +858,10 @@ def edit_record(customerID):
         city=request.form.get('city')
         userDomicile=request.form.get('userDomicile')
 
-#        contactType=request.form.get('contactType')
-#        contactDetail=request.form.get('contactDetail')
+        contactType=request.form.get('contactType')
+        contactDetail=request.form.get('contactDetail')
+
+        userID = spcific_record_all_tables[21][0]
 
 #        password=request.form.get('password')
 #        paymentContact=request.form.get('paymentContact')
@@ -896,14 +898,19 @@ def edit_record(customerID):
                             validFrom= '{validFrom}',
                             validTo= '{validTo}',
                             activationCode= '{activationCode}',
-                            HERE customerID={customerID};"""
+                            WHERE customerID={customerID};"""
         query_upadte_user = f"""UPDATE rb_test.user
                             SET
                             userStartDate= '{userStartDate}',
                             username= '{username}',
                             city= '{city}',
                             userDomicile= '{userDomicile}',
-                            HERE customerID={customerID};"""
+                            WHERE customerID={customerID};"""
+        query_upadte_contact = f"""UPDATE rb_test.contact
+                            SET
+                            contactType= '{contactType}',
+                            contactDetail= '{contactDetail}',
+                            WHERE userID={userID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
         insert_query(query_upadte_licence)
