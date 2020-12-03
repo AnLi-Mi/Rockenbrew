@@ -801,12 +801,12 @@ def edit_record(customerID):
     lastPaymentDate=''
     active=''
 
-#    type=''
-#    issueDate=''
-#    validFrom=''
-#    validTo=''
-#    activationCode=''
-#    paymentScheduleID=''
+    type=''
+    issueDate=''
+    validFrom=''
+    validTo=''
+    activationCode=''
+    paymentScheduleID=''
 
 #    userStartDate=''
 #    username=''
@@ -847,11 +847,11 @@ def edit_record(customerID):
         lastPaymentDate=request.form.get('lastPaymentDate')
         active=request.form.get('active')
 
-#        type=request.form.get('type')
-#        issueDate=request.form.get('issueDate')
-#        validFrom=request.form.get('validFrom')
-#        validTo=request.form.get('validTo')
-#        activationCode=request.form.get('activationCode')
+        type=request.form.get('type')
+        issueDate=request.form.get('issueDate')
+        validFrom=request.form.get('validFrom')
+        validTo=request.form.get('validTo')
+        activationCode=request.form.get('activationCode')
 
 #        userStartDate=request.form.get('userStartDate')
 #        username=request.form.get('username')
@@ -889,8 +889,17 @@ def edit_record(customerID):
                             active= '{active}',
                             customerID='{customerID}'
                             WHERE customerID={customerID};"""
+        query_upadte_licence = f"""UPDATE rb_test.licence
+                            SET
+                            type= '{type}',
+                            issueDate= '{issueDate}',
+                            validFrom= '{validFrom}',
+                            validTo= '{validTo}',
+                            activationCode= '{activationCode}',
+                            HERE customerID={customerID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
+        insert_query(query_upadte_licence)
 
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
