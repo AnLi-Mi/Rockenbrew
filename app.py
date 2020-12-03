@@ -818,9 +818,9 @@ def edit_record(customerID):
     contactDetail=''
     userID=''
 
-#    password=''
-#    paymentContact=''
-#    level=''
+    password=''
+    paymentContact=''
+    level=''
 
 #    keyCodeVersion=''
 #    keyCode=''
@@ -863,9 +863,9 @@ def edit_record(customerID):
 
         userID = spcific_record_all_tables[21][0]
 
-#        password=request.form.get('password')
-#        paymentContact=request.form.get('paymentContact')
-#        level=request.form.get('level')
+        password=request.form.get('password')
+        paymentContact=request.form.get('paymentContact')
+        level=request.form.get('level')
 
 #        keyCodeVersion=request.form.get('keyCodeVersion')
 #        keyCode=request.form.get('keyCode')
@@ -911,9 +911,17 @@ def edit_record(customerID):
                             contactType= '{contactType}',
                             contactDetail= '{contactDetail}',
                             WHERE userID={userID};"""
+        query_upadte_adminuser = f"""UPDATE rb_test.adminuser
+                            SET
+                            password= '{password}',
+                            paymentContact= '{paymentContact}',
+                            level= '{level}',
+                            WHERE userID={userID};"""
         insert_query(query_upadte_customer)
         insert_query(query_upadte_paymentschedule)
         insert_query(query_upadte_licence)
         insert_query(query_upadte_user)
+        insert_query(query_upadte_contact)
+        insert_query(query_upadte_adminuser)
 
     return render_template('edit_record.html', spcific_record_all_tables=spcific_record_all_tables, rbCustomerID=rbCustomerID, companyName=companyName, companyLocalID=companyLocalID, companyLocalIDType=companyLocalIDType, custTypeID=custTypeID, startDate=startDate, domicile=domicile)
